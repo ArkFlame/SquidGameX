@@ -1,12 +1,2 @@
-# Work in progress
-- Better setup system
-- SquidGames music
-- Bet for winner
-- Premade maps
-- Fixed bugs
-- Random disasters
-- Particle and sound effects
-- Multi-Server BungeeCord Support
-- Database support for player stats
-- Event mode and perpetual mode
-- Convert Arenas into Maps, and Arenas into bundles of maps (Contest, last player standing)
+# Work in progress, stay tuned
+We want to make a fully functional version o the classic SquidGame plugin by Sammwy, by fixing it's issues and bringing a much simpler setup system with new features.
