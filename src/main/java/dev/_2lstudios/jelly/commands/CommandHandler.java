@@ -8,12 +8,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
+import com.arkflame.squidgame.player.SquidPlayer;
+
 import dev._2lstudios.jelly.JellyPlugin;
 import dev._2lstudios.jelly.annotations.Command;
 import dev._2lstudios.jelly.errors.CommandException;
 import dev._2lstudios.jelly.errors.I18nCommandException;
 import dev._2lstudios.jelly.utils.ArrayUtils;
-import dev._2lstudios.squidgame.player.SquidPlayer;
 
 public class CommandHandler implements CommandExecutor {
 

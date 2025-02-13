@@ -9,6 +9,8 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
 
+import com.arkflame.squidgame.utils.EntityTypes;
+
 import dev._2lstudios.jelly.utils.ServerUtils;
 
 public class PluginPlayer {
@@ -39,14 +41,14 @@ public class PluginPlayer {
     public void spawnFirework(final int amount, final int power, final Color color, final boolean flicker) {
         final Location loc = this.getBukkitPlayer().getLocation().clone().add(0, 1, 0);
 
-        final Firework firework = (Firework) loc.getWorld().spawnEntity(loc, EntityType.FIREWORK);
+        final Firework firework = (Firework) loc.getWorld().spawnEntity(loc, EntityTypes.get("FIREWORK", "FIREWORK_ROCKET"));
         final FireworkMeta meta = firework.getFireworkMeta();
         meta.setPower(power);
         meta.addEffect(FireworkEffect.builder().withColor(color).flicker(flicker).withTrail().build());
         firework.setFireworkMeta(meta);
 
         for (int i = 1; i < amount; i++) {
-            final Firework fireworkCopy = (Firework) loc.getWorld().spawnEntity(loc, EntityType.FIREWORK);
+            final Firework fireworkCopy = (Firework) loc.getWorld().spawnEntity(loc, EntityTypes.get("FIREWORK", "FIREWORK_ROCKET"));
             fireworkCopy.setFireworkMeta(meta);
         }
     }
