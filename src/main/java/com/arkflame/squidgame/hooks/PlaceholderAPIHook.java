@@ -15,7 +15,7 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
 
     public PlaceholderAPIHook(SquidGame plugin) {
         this.plugin = plugin;
-        enabled = true;
+        PlaceholderAPIHook.enabled = plugin.getServer().getPluginManager().isPluginEnabled("PlaceholderAPI");
     }
 
     public String getPlugin() {
