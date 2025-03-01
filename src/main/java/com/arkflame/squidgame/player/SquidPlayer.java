@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 
 import com.arkflame.squidgame.SquidGame;
 import com.arkflame.squidgame.arena.Arena;
+import com.arkflame.squidgame.hooks.PlaceholderAPIFormatter;
 import com.arkflame.squidgame.hooks.PlaceholderAPIHook;
 import com.arkflame.squidgame.jelly.player.PluginPlayer;
 
@@ -72,7 +73,7 @@ public class SquidPlayer extends PluginPlayer {
                 translatedMessage == null
                         ? "§6§lWARNING: §eMissing translation key §7" + message + " §ein message.yml file"
                         : translatedMessage);
-        String replacedVariables = PlaceholderAPIHook.formatString(formatColor, this.getBukkitPlayer());
+        String replacedVariables = PlaceholderAPIFormatter.formatString(formatColor, this.getBukkitPlayer());
         return replacedVariables;
     }
 

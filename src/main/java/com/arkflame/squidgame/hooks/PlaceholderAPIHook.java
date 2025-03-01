@@ -1,49 +1,54 @@
 package com.arkflame.squidgame.hooks;
 
-import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-
 import org.bukkit.entity.Player;
-
 import com.arkflame.squidgame.SquidGame;
 import com.arkflame.squidgame.arena.Arena;
 import com.arkflame.squidgame.player.SquidPlayer;
 
 public class PlaceholderAPIHook extends PlaceholderExpansion {
-    private SquidGame plugin;
-    private static boolean enabled = false;
+    private final SquidGame plugin;
 
     public PlaceholderAPIHook(SquidGame plugin) {
         this.plugin = plugin;
-        PlaceholderAPIHook.enabled = plugin.getServer().getPluginManager().isPluginEnabled("PlaceholderAPI");
     }
 
-    public String getPlugin() {
-        return plugin.getDescription().getName();
-    }
-
+    @Override
     public String getIdentifier() {
-        return this.getPlugin().toLowerCase();
+        return plugin.getDescription().getName().toLowerCase();
     }
 
+    @Override
     public String getAuthor() {
         return plugin.getDescription().getAuthors().get(0);
     }
 
+    @Override
     public String getVersion() {
         return plugin.getDescription().getVersion();
     }
 
-    /* Static Formatter */
-    public static String formatString(String text, Player player) {
-        if (enabled) {
-            return PlaceholderAPI.setPlaceholders(player, text);
-        } else {
-            return text;
+    @Override
+    public String onPlaceholderRequest(Player player, String identifier) {
+        if (player == null && (identifier.startsWith("player_") || identifier.startsWith("arena_"))) {
+            return "";
         }
+
+        SquidPlayer squidPlayer = this.plugin.getPlayerManager().getPlayer(player);
+
+        if (identifier.startsWith("player_")) {
+            return requestPlayerPlaceholder(squidPlayer, identifier.split("_")[1]);
+        } else if (identifier.startsWith("arena_")) {
+            Arena arena = squidPlayer != null ? squidPlayer.getArena() : null;
+            if (arena == null) {
+                return "";
+            }
+            return requestArenaPlaceholder(arena, identifier.split("_")[1]);
+        }
+
+        return null;
     }
 
-    /* Formatters */
     private String requestPlayerPlaceholder(SquidPlayer player, String identifier) {
         switch (identifier) {
             case "wins":
@@ -64,19 +69,18 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
             case "leaved":
                 return arena.getLeavedPlayer() != null ? arena.getLeavedPlayer() : "None";
             case "players":
-                return arena.getPlayers().size() + "";
+                return String.valueOf(arena.getPlayers().size());
             case "winner":
                 SquidPlayer winner = arena.calculateWinner();
-                String name = winner != null ? winner.getBukkitPlayer().getName() : "None";
-                return name;
+                return winner != null ? winner.getBukkitPlayer().getName() : "None";
             case "maxplayers":
-                return arena.getMaxPlayers() + "";
+                return String.valueOf(arena.getMaxPlayers());
             case "required":
-                return arena.getMinPlayers() + "";
+                return String.valueOf(arena.getMinPlayers());
             case "time":
-                return arena.getInternalTime() + "";
+                return String.valueOf(arena.getInternalTime());
             case "spectators":
-                return arena.getSpectators().size() + "";
+                return String.valueOf(arena.getSpectators().size());
             case "game":
                 return arena.getCurrentGame() == null ? "None" : arena.getCurrentGame().getName();
             case "name":
@@ -84,28 +88,5 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
             default:
                 return null;
         }
-    }
-
-    /* Handler */
-    public String onPlaceholderRequest(Player player, String identifier) {
-        if (player == null && (identifier.startsWith("player_") || identifier.startsWith("arena_"))) {
-            return "";
-        }
-
-        SquidPlayer squidPlayer = this.plugin.getPlayerManager().getPlayer(player);
-
-        if (identifier.startsWith("player_")) {
-            return this.requestPlayerPlaceholder(squidPlayer, identifier.split("_")[1]);
-        }
-
-        else if (identifier.startsWith("arena_")) {
-            Arena arena = squidPlayer != null ? squidPlayer.getArena() : null;
-            if (arena == null) {
-                return "";
-            }
-            return this.requestArenaPlaceholder(arena, identifier.split("_")[1]);
-        }
-
-        return null;
     }
 }

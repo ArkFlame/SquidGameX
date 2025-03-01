@@ -7,6 +7,7 @@ import org.bukkit.plugin.PluginManager;
 
 import com.arkflame.squidgame.arena.ArenaManager;
 import com.arkflame.squidgame.commands.SquidGameCommand;
+import com.arkflame.squidgame.hooks.PlaceholderAPIFormatter;
 import com.arkflame.squidgame.hooks.PlaceholderAPIHook;
 import com.arkflame.squidgame.hooks.ScoreboardHook;
 import com.arkflame.squidgame.jelly.JellyPlugin;
@@ -44,6 +45,7 @@ public class SquidGame extends JellyPlugin {
 
         if (pluginManager.isPluginEnabled("PlaceholderAPI")) {
             new PlaceholderAPIHook(this).register();
+            PlaceholderAPIFormatter.setEnabled(true);
             this.usePAPI = true;
         }
 
