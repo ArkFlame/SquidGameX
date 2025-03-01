@@ -41,11 +41,35 @@ public class PlayerJoinListener implements Listener {
 
         if (player.hasPermission("squidgame.admin")) {
             this.plugin.runTaskLater(() -> {
-                player.sendMessage(
+                squidPlayer.sendRawMessage(
                         "&6&lSquidGame &7&l>> &eYou are running version &6" + this.plugin.getDescription().getVersion()
                                 + "&e. &7&o(https://www.spigotmc.org/resources/squidgame.100000/)");
                 player.playSound(player.getLocation(), Sounds.get("ITEM_PICKUP", "ENTITY_ITEM_PICKUP"), 1.0F, 1.0F);
             }, 20L);
+            this.plugin.runTaskLater(() -> {
+                squidPlayer.sendRawMessage(
+                        "&6&lSquidGame &7&l>> &eThis plugin is still in development. Please report any bugs to the developer.");
+                player.playSound(player.getLocation(), Sounds.get("ITEM_PICKUP", "ENTITY_ITEM_PICKUP"), 1.0F, 1.0F);
+            }, 40L);
+            boolean isLobbySetup = config.get("lobby") != null;
+            boolean hasArenas = !this.plugin.getArenaManager().getArenas().isEmpty();
+            this.plugin.runTaskLater(() -> {
+                squidPlayer.sendRawMessage(
+                        "&6&lSquidGame &7&l>> &eThe lobby is " + (isLobbySetup ? "set" : "not set")
+                                + ". &7&o(Use &c/squid setlobby &7&oto set the lobby)");
+                player.playSound(player.getLocation(), Sounds.get("ITEM_PICKUP", "ENTITY_ITEM_PICKUP"), 1.0F, 1.0F);
+            }, 60L);
+            this.plugin.runTaskLater(() -> {
+                squidPlayer.sendRawMessage(
+                        "&6&lSquidGame &7&l>> &eThere are " + (hasArenas ? "arenas" : "no arenas")
+                                + " configured. &7&o(Use &c/squid createarena [name] &7&oto create an arena)");
+                player.playSound(player.getLocation(), Sounds.get("ITEM_PICKUP", "ENTITY_ITEM_PICKUP"), 1.0F, 1.0F);
+            }, 70L);
+            this.plugin.runTaskLater(() -> {
+                squidPlayer.sendRawMessage(
+                        "&6&lSquidGame &7&l>> &eYou can also use &c/squid help &7&oto get help with the plugin.");
+                player.playSound(player.getLocation(), Sounds.get("ITEM_PICKUP", "ENTITY_ITEM_PICKUP"), 1.0F, 1.0F);
+            }, 80L);
         }
     }
 }

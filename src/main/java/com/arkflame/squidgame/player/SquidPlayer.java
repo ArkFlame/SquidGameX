@@ -1,14 +1,13 @@
 package com.arkflame.squidgame.player;
 
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 import com.arkflame.squidgame.SquidGame;
 import com.arkflame.squidgame.arena.Arena;
 import com.arkflame.squidgame.hooks.PlaceholderAPIFormatter;
-import com.arkflame.squidgame.hooks.PlaceholderAPIHook;
 import com.arkflame.squidgame.jelly.player.PluginPlayer;
+import com.arkflame.squidgame.utils.ChatColors;
 
 public class SquidPlayer extends PluginPlayer {
 
@@ -69,12 +68,16 @@ public class SquidPlayer extends PluginPlayer {
 
     private String formatMessage(String message) {
         String translatedMessage = this.getI18n(message);
-        String formatColor = ChatColor.translateAlternateColorCodes('&',
+        String formatColor = ChatColors.color(
                 translatedMessage == null
                         ? "§6§lWARNING: §eMissing translation key §7" + message + " §ein message.yml file"
                         : translatedMessage);
         String replacedVariables = PlaceholderAPIFormatter.formatString(formatColor, this.getBukkitPlayer());
         return replacedVariables;
+    }
+
+    public void sendRawMessage(String message) {
+        this.getBukkitPlayer().sendMessage(ChatColors.color(PlaceholderAPIFormatter.formatString(message, this.getBukkitPlayer())));
     }
 
     public void sendMessage(String message) {
