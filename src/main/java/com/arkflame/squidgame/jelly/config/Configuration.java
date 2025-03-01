@@ -15,6 +15,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import com.arkflame.squidgame.jelly.math.Cuboid;
 import com.arkflame.squidgame.jelly.math.Vector3;
 import com.arkflame.squidgame.jelly.utils.WorldUtils;
+import com.arkflame.squidgame.utils.Sounds;
 
 public class Configuration extends YamlConfiguration {
 
@@ -75,15 +76,13 @@ public class Configuration extends YamlConfiguration {
     /* Custom object get and set */
     private Sound getSound(String key) {
         String name = this.getString(key);
-
-        for (Sound sound : Sound.values()) {
-            if (name.equals(sound.name())) {
-                return sound;
-            }
+        Sound sound = Sounds.get(name);
+        if (sound != null) {
+            return sound;
+        } else {
+            Bukkit.getLogger().warning("Couldn't load sound '" + name + "' from configuration file! (Invalid name?)");
+            return null;
         }
-
-        Bukkit.getLogger().warning("Couldn't load sound '" + name + "' from configuration file! (Invalid name?)");
-        return null;
     }
 
     public Sound getSound(String key, String defaultValue) {

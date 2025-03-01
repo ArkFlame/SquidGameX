@@ -55,4 +55,28 @@ public class JellyPlugin extends JavaPlugin {
             this.pluginPlayerManager.addPlayer(player);
         }
     }
+
+    public void runTaskLater(Runnable runnable, long l) {
+        this.getServer().getScheduler().runTaskLater(this, runnable, l);
+    }
+
+    public void runTaskLaterAsynchronously(Runnable runnable, long l) {
+        this.getServer().getScheduler().runTaskLaterAsynchronously(this, runnable, l);
+    }
+
+    public void runTask(Runnable runnable) {
+        this.getServer().getScheduler().runTask(this, runnable);
+    }
+
+    public void runTaskAsync(Runnable runnable) {
+        this.getServer().getScheduler().runTaskAsynchronously(this, runnable);
+    }
+
+    public void runTaskTimer(Runnable runnable, long l, long l1) {
+        this.getServer().getScheduler().runTaskTimer(this, runnable, l, l1);
+    }
+
+    public void runTaskTimerAsynchronously(Runnable runnable, long l, long l1) {
+        this.getServer().getScheduler().runTaskTimerAsynchronously(this, runnable, l, l1);
+    }
 }
