@@ -15,7 +15,7 @@ public class BlockUtils {
         if (useParticles) {
             block.breakNaturally();
         } else {
-            block.setType(Materials.get("AIR);
+            block.setType(Materials.get("AIR");
         }
 
         if (up.getType() == target) {
