@@ -9,6 +9,8 @@ import com.arkflame.squidgame.arena.ArenaManager;
 import com.arkflame.squidgame.commands.SquidGameCommand;
 import com.arkflame.squidgame.hooks.PlaceholderAPIHook;
 import com.arkflame.squidgame.hooks.ScoreboardHook;
+import com.arkflame.squidgame.jelly.JellyPlugin;
+import com.arkflame.squidgame.jelly.config.Configuration;
 import com.arkflame.squidgame.listeners.AsyncPlayerChatListener;
 import com.arkflame.squidgame.listeners.BlockBreakListener;
 import com.arkflame.squidgame.listeners.BlockPlaceListener;
@@ -21,9 +23,6 @@ import com.arkflame.squidgame.listeners.PlayerMoveListener;
 import com.arkflame.squidgame.listeners.PlayerQuitListener;
 import com.arkflame.squidgame.player.PlayerManager;
 import com.arkflame.squidgame.tasks.ArenaTickTask;
-
-import dev._2lstudios.jelly.JellyPlugin;
-import dev._2lstudios.jelly.config.Configuration;
 
 public class SquidGame extends JellyPlugin {
 

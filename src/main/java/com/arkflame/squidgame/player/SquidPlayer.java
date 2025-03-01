@@ -7,8 +7,7 @@ import org.bukkit.entity.Player;
 import com.arkflame.squidgame.SquidGame;
 import com.arkflame.squidgame.arena.Arena;
 import com.arkflame.squidgame.hooks.PlaceholderAPIHook;
-
-import dev._2lstudios.jelly.player.PluginPlayer;
+import com.arkflame.squidgame.jelly.player.PluginPlayer;
 
 public class SquidPlayer extends PluginPlayer {
 

@@ -8,9 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import com.arkflame.squidgame.SquidGame;
+import com.arkflame.squidgame.jelly.utils.ObjectUtils;
 import com.arkflame.squidgame.player.SquidPlayer;
-
-import dev._2lstudios.jelly.utils.ObjectUtils;
 
 public class AsyncPlayerChatListener implements Listener {
 

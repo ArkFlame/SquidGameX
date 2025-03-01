@@ -6,8 +6,7 @@ import java.util.Map;
 import org.bukkit.entity.Player;
 
 import com.arkflame.squidgame.SquidGame;
-
-import dev._2lstudios.jelly.player.IPluginPlayerManager;
+import com.arkflame.squidgame.jelly.player.IPluginPlayerManager;
 
 public class PlayerManager implements IPluginPlayerManager {
 

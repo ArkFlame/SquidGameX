@@ -6,12 +6,11 @@ import org.bukkit.entity.Player;
 
 import com.arkflame.squidgame.SquidGame;
 import com.arkflame.squidgame.arena.Arena;
+import com.arkflame.squidgame.jelly.gui.InventoryGUI;
 import com.arkflame.squidgame.player.PlayerManager;
 import com.arkflame.squidgame.player.PlayerWand;
 import com.arkflame.squidgame.player.SquidPlayer;
 import com.arkflame.squidgame.utils.Materials;
-
-import dev._2lstudios.jelly.gui.InventoryGUI;
 
 public class EditArenaGame1GUI extends InventoryGUI {
 

@@ -5,8 +5,7 @@ import org.bukkit.Location;
 
 import com.arkflame.squidgame.SquidGame;
 import com.arkflame.squidgame.arena.Arena;
-
-import dev._2lstudios.jelly.config.Configuration;
+import com.arkflame.squidgame.jelly.config.Configuration;
 
 public abstract class ArenaGameBase {
 

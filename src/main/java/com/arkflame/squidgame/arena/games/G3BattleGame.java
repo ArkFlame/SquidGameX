@@ -5,9 +5,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.arkflame.squidgame.arena.Arena;
+import com.arkflame.squidgame.jelly.config.Configuration;
 import com.arkflame.squidgame.player.SquidPlayer;
-
-import dev._2lstudios.jelly.config.Configuration;
 
 public class G3BattleGame extends ArenaGameBase {
 

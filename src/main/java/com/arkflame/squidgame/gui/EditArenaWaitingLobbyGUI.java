@@ -5,9 +5,8 @@ import java.io.IOException;
 import org.bukkit.entity.Player;
 
 import com.arkflame.squidgame.arena.Arena;
+import com.arkflame.squidgame.jelly.gui.InventoryGUI;
 import com.arkflame.squidgame.utils.Materials;
-
-import dev._2lstudios.jelly.gui.InventoryGUI;
 
 public class EditArenaWaitingLobbyGUI extends InventoryGUI {
 

@@ -6,9 +6,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import com.arkflame.squidgame.SquidGame;
 import com.arkflame.squidgame.hooks.ScoreboardHook;
+import com.arkflame.squidgame.jelly.config.Configuration;
 import com.arkflame.squidgame.player.SquidPlayer;
-
-import dev._2lstudios.jelly.config.Configuration;
 
 public class PlayerJoinListener implements Listener {
     private SquidGame plugin;

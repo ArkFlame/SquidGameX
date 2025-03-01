@@ -1,6 +1,6 @@
 package com.arkflame.squidgame.errors;
 
-import dev._2lstudios.jelly.errors.I18nCommandException;
+import com.arkflame.squidgame.jelly.errors.I18nCommandException;
 
 public class ArenaMisconfiguredException extends I18nCommandException {
     public ArenaMisconfiguredException() {

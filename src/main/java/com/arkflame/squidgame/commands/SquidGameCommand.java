@@ -7,10 +7,9 @@ import com.arkflame.squidgame.commands.admin.SquidWandCommand;
 import com.arkflame.squidgame.commands.game.SquidJoinCommand;
 import com.arkflame.squidgame.commands.game.SquidLeaveCommand;
 import com.arkflame.squidgame.commands.game.SquidStartCommand;
-
-import dev._2lstudios.jelly.annotations.Command;
-import dev._2lstudios.jelly.commands.CommandContext;
-import dev._2lstudios.jelly.commands.CommandListener;
+import com.arkflame.squidgame.jelly.annotations.Command;
+import com.arkflame.squidgame.jelly.commands.CommandContext;
+import com.arkflame.squidgame.jelly.commands.CommandListener;
 
 @Command(name = "squidgame")
 public class SquidGameCommand extends CommandListener {

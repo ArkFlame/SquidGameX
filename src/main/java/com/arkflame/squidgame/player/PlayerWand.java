@@ -2,8 +2,8 @@ package com.arkflame.squidgame.player;
 
 import org.bukkit.Location;
 
-import dev._2lstudios.jelly.math.Cuboid;
-import dev._2lstudios.jelly.math.Vector3;
+import com.arkflame.squidgame.jelly.math.Cuboid;
+import com.arkflame.squidgame.jelly.math.Vector3;
 
 public class PlayerWand {
 

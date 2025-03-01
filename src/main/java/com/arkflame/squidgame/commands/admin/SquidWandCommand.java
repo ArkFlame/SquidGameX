@@ -8,14 +8,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.arkflame.squidgame.errors.ArenaMisconfiguredException;
 import com.arkflame.squidgame.errors.NoAvailableArenaException;
+import com.arkflame.squidgame.jelly.annotations.Command;
+import com.arkflame.squidgame.jelly.commands.CommandContext;
+import com.arkflame.squidgame.jelly.commands.CommandExecutionTarget;
+import com.arkflame.squidgame.jelly.commands.CommandListener;
 import com.arkflame.squidgame.player.PlayerWand;
 import com.arkflame.squidgame.player.SquidPlayer;
 import com.arkflame.squidgame.utils.Materials;
-
-import dev._2lstudios.jelly.annotations.Command;
-import dev._2lstudios.jelly.commands.CommandContext;
-import dev._2lstudios.jelly.commands.CommandExecutionTarget;
-import dev._2lstudios.jelly.commands.CommandListener;
 
 @Command(name = "wand", usage = "/squid wand", description = "Give you region wand", permission = "squidgame.admin.wand", target = CommandExecutionTarget.ONLY_PLAYER)
 public class SquidWandCommand extends CommandListener {

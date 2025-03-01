@@ -9,11 +9,10 @@ import org.bukkit.entity.Player;
 
 import com.arkflame.squidgame.SquidGame;
 import com.arkflame.squidgame.arena.Arena;
+import com.arkflame.squidgame.jelly.math.Cuboid;
+import com.arkflame.squidgame.jelly.math.Vector3;
+import com.arkflame.squidgame.jelly.utils.NumberUtils;
 import com.arkflame.squidgame.player.SquidPlayer;
-
-import dev._2lstudios.jelly.math.Cuboid;
-import dev._2lstudios.jelly.math.Vector3;
-import dev._2lstudios.jelly.utils.NumberUtils;
 
 public class G1RedGreenLightGame extends ArenaGameBase {
 

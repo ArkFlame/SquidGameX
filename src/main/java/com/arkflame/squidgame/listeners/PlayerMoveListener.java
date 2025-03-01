@@ -12,11 +12,10 @@ import com.arkflame.squidgame.arena.ArenaState;
 import com.arkflame.squidgame.arena.games.G1RedGreenLightGame;
 import com.arkflame.squidgame.arena.games.G6GlassesGame;
 import com.arkflame.squidgame.arena.games.G7SquidGame;
+import com.arkflame.squidgame.jelly.math.Vector3;
+import com.arkflame.squidgame.jelly.utils.BlockUtils;
 import com.arkflame.squidgame.player.SquidPlayer;
 import com.arkflame.squidgame.utils.Materials;
-
-import dev._2lstudios.jelly.math.Vector3;
-import dev._2lstudios.jelly.utils.BlockUtils;
 
 public class PlayerMoveListener implements Listener {
 

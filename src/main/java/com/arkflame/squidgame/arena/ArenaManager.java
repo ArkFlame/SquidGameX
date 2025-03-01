@@ -13,8 +13,7 @@ import com.arkflame.squidgame.SquidGame;
 import com.arkflame.squidgame.errors.ArenaAlreadyExistException;
 import com.arkflame.squidgame.errors.ArenaMisconfiguredException;
 import com.arkflame.squidgame.errors.NoAvailableArenaException;
-
-import dev._2lstudios.jelly.config.Configuration;
+import com.arkflame.squidgame.jelly.config.Configuration;
 
 public class ArenaManager {
 

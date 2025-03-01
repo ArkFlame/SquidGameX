@@ -16,9 +16,8 @@ import com.arkflame.squidgame.arena.games.G1RedGreenLightGame;
 import com.arkflame.squidgame.arena.games.G3BattleGame;
 import com.arkflame.squidgame.arena.games.G6GlassesGame;
 import com.arkflame.squidgame.arena.games.G7SquidGame;
+import com.arkflame.squidgame.jelly.config.Configuration;
 import com.arkflame.squidgame.player.SquidPlayer;
-
-import dev._2lstudios.jelly.config.Configuration;
 
 public class Arena {
     private List<SquidPlayer> players;

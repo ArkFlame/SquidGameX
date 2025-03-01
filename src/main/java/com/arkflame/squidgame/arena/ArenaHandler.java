@@ -7,9 +7,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Color;
 
 import com.arkflame.squidgame.SquidGame;
+import com.arkflame.squidgame.jelly.config.Configuration;
 import com.arkflame.squidgame.player.SquidPlayer;
-
-import dev._2lstudios.jelly.config.Configuration;
 
 public class ArenaHandler {
     private Arena arena;
