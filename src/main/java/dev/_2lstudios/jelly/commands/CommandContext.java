@@ -8,15 +8,15 @@ import dev._2lstudios.jelly.player.PluginPlayer;
 
 public class CommandContext {
 
-    private final CommandArguments arguments;
-    private final JellyPlugin plugin;
-    private final CommandSender sender;
+    private CommandArguments arguments;
+    private JellyPlugin plugin;
+    private CommandSender sender;
 
-    private final boolean isPlayer;
+    private boolean isPlayer;
 
     private PluginPlayer pluginPlayer;
 
-    public CommandContext(final JellyPlugin plugin, final CommandSender sender, final CommandArguments arguments) {
+    public CommandContext(JellyPlugin plugin, CommandSender sender, CommandArguments arguments) {
         this.arguments = arguments;
         this.plugin = plugin;
         this.sender = sender;

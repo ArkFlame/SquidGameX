@@ -21,15 +21,15 @@ import com.arkflame.squidgame.player.SquidPlayer;
 import dev._2lstudios.jelly.config.Configuration;
 
 public class Arena {
-    private final List<SquidPlayer> players;
-    private final List<SquidPlayer> spectators;
-    private final List<ArenaGameBase> games;
+    private List<SquidPlayer> players;
+    private List<SquidPlayer> spectators;
+    private List<ArenaGameBase> games;
 
-    private final Configuration mainConfig;
-    private final Configuration arenaConfig;
-    private final ArenaHandler handler;
-    private final World world;
-    private final String name;
+    private Configuration mainConfig;
+    private Configuration arenaConfig;
+    private ArenaHandler handler;
+    private World world;
+    private String name;
 
     private String joined, leaved, death;
 
@@ -38,7 +38,7 @@ public class Arena {
     private int internalTime;
     private boolean allowPvP;
 
-    public Arena(final World world, final String name, final Configuration arenaConfig) {
+    public Arena(World world, String name, Configuration arenaConfig) {
         this.players = new ArrayList<>();
         this.spectators = new ArrayList<>();
         this.games = new ArrayList<>();
@@ -53,7 +53,7 @@ public class Arena {
     }
 
     public void resetArena() {
-        for (final SquidPlayer player : this.getAllPlayers()) {
+        for (SquidPlayer player : this.getAllPlayers()) {
             this.removePlayer(player);
         }
 
@@ -70,10 +70,10 @@ public class Arena {
         this.spectators.clear();
         this.games.clear();
 
-        final int game1Time = mainConfig.getInt("game-settings.game-time.1", 60);
-        final int game3Time = mainConfig.getInt("game-settings.game-time.3", 60);
-        final int game6Time = mainConfig.getInt("game-settings.game-time.6", 60);
-        final int game7Time = mainConfig.getInt("game-settings.game-time.7", 60);
+        int game1Time = mainConfig.getInt("game-settings.game-time.1", 60);
+        int game3Time = mainConfig.getInt("game-settings.game-time.3", 60);
+        int game6Time = mainConfig.getInt("game-settings.game-time.6", 60);
+        int game7Time = mainConfig.getInt("game-settings.game-time.7", 60);
 
         if (game1Time > 0)
             this.games.add(new G1RedGreenLightGame(this, game1Time));
@@ -89,38 +89,38 @@ public class Arena {
         return this.mainConfig;
     }
 
-    public void broadcastPotionEffect(final PotionEffect e) {
-        for (final SquidPlayer player : this.getPlayers()) {
+    public void broadcastPotionEffect(PotionEffect e) {
+        for (SquidPlayer player : this.getPlayers()) {
             player.getBukkitPlayer().addPotionEffect(e);
         }
     }
 
-    public void broadcastRemovePotionEffect(final PotionEffectType e) {
-        for (final SquidPlayer player : this.getPlayers()) {
+    public void broadcastRemovePotionEffect(PotionEffectType e) {
+        for (SquidPlayer player : this.getPlayers()) {
             player.getBukkitPlayer().removePotionEffect(e);
         }
     }
 
-    public void broadcastMessage(final String message) {
-        for (final SquidPlayer player : this.getAllPlayers()) {
+    public void broadcastMessage(String message) {
+        for (SquidPlayer player : this.getAllPlayers()) {
             player.sendMessage(message);
         }
     }
 
-    public void broadcastSound(final Sound sound) {
-        for (final SquidPlayer player : this.getAllPlayers()) {
+    public void broadcastSound(Sound sound) {
+        for (SquidPlayer player : this.getAllPlayers()) {
             player.playSound(sound);
         }
     }
 
-    public void broadcastTitle(final String title, final String subtitle) {
-        for (final SquidPlayer player : this.getAllPlayers()) {
+    public void broadcastTitle(String title, String subtitle) {
+        for (SquidPlayer player : this.getAllPlayers()) {
             player.sendTitle(title, subtitle, 2);
         }
     }
 
-    public void broadcastScoreboard(final String scoreboardKey) {
-        for (final SquidPlayer player : this.getAllPlayers()) {
+    public void broadcastScoreboard(String scoreboardKey) {
+        for (SquidPlayer player : this.getAllPlayers()) {
             player.sendScoreboard(scoreboardKey);
         }
     }
@@ -139,25 +139,25 @@ public class Arena {
 
     public Location getSpawnPosition() {
         if (this.getState() == ArenaState.INTERMISSION || this.getState() == ArenaState.FINISHING_ARENA) {
-            final Location loc = this.arenaConfig.getLocation("arena.waiting_room", false);
+            Location loc = this.arenaConfig.getLocation("arena.waiting_room", false);
             loc.setWorld(this.world);
             return loc;
         } else if (this.getCurrentGame() != null) {
             return this.getCurrentGame().getSpawnPosition();
         } else {
-            final Location loc = this.arenaConfig.getLocation("arena.prelobby", false);
+            Location loc = this.arenaConfig.getLocation("arena.prelobby", false);
             loc.setWorld(this.world);
             return loc;
         }
     }
 
-    public void teleportAllPlayers(final Location location) {
-        for (final SquidPlayer player : this.getAllPlayers()) {
+    public void teleportAllPlayers(Location location) {
+        for (SquidPlayer player : this.getAllPlayers()) {
             player.teleport(location);
         }
     }
 
-    public void finishArena(final ArenaFinishReason reason) {
+    public void finishArena(ArenaFinishReason reason) {
         if (this.currentGame != null) {
             this.currentGame.onStop();
         }
@@ -167,7 +167,7 @@ public class Arena {
         this.teleportAllPlayers(this.getSpawnPosition());
     }
 
-    public Arena addPlayer(final SquidPlayer player) {
+    public Arena addPlayer(SquidPlayer player) {
         if (!this.players.contains(player) && !this.spectators.contains(player)) {
             this.joined = player.getBukkitPlayer().getName();
             this.players.add(player);
@@ -186,9 +186,9 @@ public class Arena {
     }
 
     public void killAllPlayers() {
-        final List<SquidPlayer> list = new ArrayList<>(this.players);
+        List<SquidPlayer> list = new ArrayList<>(this.players);
 
-        for (final SquidPlayer player : list) {
+        for (SquidPlayer player : list) {
             this.death = player.getBukkitPlayer().getName();
             this.broadcastSound(this.getMainConfig().getSound("game-settings.sounds.player-death", "EXPLODE"));
             this.broadcastMessage("arena.death");
@@ -197,7 +197,7 @@ public class Arena {
         this.finishArena(ArenaFinishReason.ALL_PLAYERS_DEATH);
     }
 
-    public void killPlayer(final SquidPlayer player, boolean setSpectator) {
+    public void killPlayer(SquidPlayer player, boolean setSpectator) {
         if (setSpectator) {
             this.addSpectator(player);
         }
@@ -211,9 +211,9 @@ public class Arena {
         }
 
         else if (this.calculateWinner() != null) {
-            final boolean allowVictory = this.mainConfig
+            boolean allowVictory = this.mainConfig
                     .getBoolean("game-settings.allow-victory-before-completing-game", false);
-            final boolean isLastGame = this.currentGame != null && this.currentGame instanceof G7SquidGame;
+            boolean isLastGame = this.currentGame != null && this.currentGame instanceof G7SquidGame;
 
             if (isLastGame || allowVictory) {
                 this.finishArena(ArenaFinishReason.ONE_PLAYER_IN_ARENA);
@@ -221,11 +221,11 @@ public class Arena {
         }
     }
 
-    public void killPlayer(final SquidPlayer player) {
+    public void killPlayer(SquidPlayer player) {
         this.killPlayer(player, true);
     }
 
-    public Arena addSpectator(final SquidPlayer player) {
+    public Arena addSpectator(SquidPlayer player) {
         if (!this.spectators.contains(player)) {
             if (this.players.contains(player)) {
                 this.players.remove(player);
@@ -238,7 +238,7 @@ public class Arena {
         return this;
     }
 
-    public void removePlayer(final SquidPlayer player) {
+    public void removePlayer(SquidPlayer player) {
         if (this.players.contains(player)) {
             this.leaved = player.getBukkitPlayer().getName();
             this.players.remove(player);
@@ -262,7 +262,7 @@ public class Arena {
     }
 
     public List<SquidPlayer> getAllPlayers() {
-        final List<SquidPlayer> result = new ArrayList<>(this.getPlayers());
+        List<SquidPlayer> result = new ArrayList<>(this.getPlayers());
         result.addAll(this.getSpectators());
         return result;
     }
@@ -295,12 +295,12 @@ public class Arena {
         return this.internalTime;
     }
 
-    public void setState(final ArenaState newState) {
+    public void setState(ArenaState newState) {
         this.state = newState;
         this.handler.handleArenaSwitchState();
     }
 
-    public void setInternalTime(final int time) {
+    public void setInternalTime(int time) {
         if (time >= 0) {
             this.internalTime = time;
         }
@@ -334,7 +334,7 @@ public class Arena {
         return this.allowPvP;
     }
 
-    public void setPvPAllowed(final boolean result) {
+    public void setPvPAllowed(boolean result) {
         this.allowPvP = result;
     }
 
@@ -353,7 +353,7 @@ public class Arena {
             this.currentGame.onStop();
         }
 
-        final ArenaGameBase nextGame = this.games.get(0);
+        ArenaGameBase nextGame = this.games.get(0);
         this.currentGame = nextGame;
         this.games.remove(nextGame);
 

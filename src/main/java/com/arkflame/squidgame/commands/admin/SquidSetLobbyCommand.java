@@ -16,9 +16,9 @@ import dev._2lstudios.jelly.errors.CommandException;
 public class SquidSetLobbyCommand extends CommandListener {
     @Override
     public void handle(CommandContext context) throws IOException, CommandException {
-        final SquidGame plugin = (SquidGame) context.getPlugin();
-        final SquidPlayer player = (SquidPlayer) context.getPluginPlayer();
-        final Configuration config = plugin.getMainConfig();
+        SquidGame plugin = (SquidGame) context.getPlugin();
+        SquidPlayer player = (SquidPlayer) context.getPluginPlayer();
+        Configuration config = plugin.getMainConfig();
 
         config.setLocation("lobby", player.getBukkitPlayer().getLocation());
         player.sendMessage("setup.set-lobby");

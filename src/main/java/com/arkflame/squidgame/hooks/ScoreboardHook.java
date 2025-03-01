@@ -10,19 +10,19 @@ import com.arkflame.squidgame.player.SquidPlayer;
 import dev._2lstudios.swiftboard.SwiftBoard;
 
 public class ScoreboardHook {
-    private final PluginManager pluginManager;
+    private PluginManager pluginManager;
 
-    public ScoreboardHook(final PluginManager pluginManager) {
+    public ScoreboardHook(PluginManager pluginManager) {
         this.pluginManager = pluginManager;
     }
 
-    public void request(final Player player, final List<String> lines) {
+    public void request(Player player, List<String> lines) {
         if (pluginManager.isPluginEnabled("SwiftBoard")) {
             SwiftBoard.getSwiftSidebar().setLines(player, lines);
         }
     }
 
-    public void request(final SquidPlayer squidPlayer, final List<String> lines) {
+    public void request(SquidPlayer squidPlayer, List<String> lines) {
         request(squidPlayer.getBukkitPlayer(), lines);
     }
 

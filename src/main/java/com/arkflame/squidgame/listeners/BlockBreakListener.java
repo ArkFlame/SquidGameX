@@ -10,17 +10,17 @@ import com.arkflame.squidgame.arena.Arena;
 import com.arkflame.squidgame.player.SquidPlayer;
 
 public class BlockBreakListener implements Listener {
-    private final SquidGame plugin;
+    private SquidGame plugin;
 
-    public BlockBreakListener(final SquidGame plugin) {
+    public BlockBreakListener(SquidGame plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onBlockBreak(final BlockBreakEvent e) {
-        final Player bukkitPlayer = e.getPlayer();
-        final SquidPlayer squidPlayer = (SquidPlayer) this.plugin.getPlayerManager().getPlayer(bukkitPlayer);
-        final Arena arena = squidPlayer.getArena();
+    public void onBlockBreak(BlockBreakEvent e) {
+        Player bukkitPlayer = e.getPlayer();
+        SquidPlayer squidPlayer = this.plugin.getPlayerManager().getPlayer(bukkitPlayer);
+        Arena arena = squidPlayer.getArena();
 
         if (arena != null) {
             e.setCancelled(true);

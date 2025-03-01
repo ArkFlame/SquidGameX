@@ -29,11 +29,11 @@ public class JellyPlugin extends JavaPlugin {
         this.commandHandler.addCommand(cmd);
     }
 
-    public void addEventListener(final Listener listener) {
+    public void addEventListener(Listener listener) {
         this.getServer().getPluginManager().registerEvents(listener, this);
     }
 
-    public Configuration getConfig(final String name) {
+    public Configuration getConfig(String name) {
         return this.configManager.getConfig(name);
     }
 
@@ -41,7 +41,7 @@ public class JellyPlugin extends JavaPlugin {
         return this.pluginPlayerManager;
     }
 
-    public void setPluginPlayerManager(final IPluginPlayerManager manager) {
+    public void setPluginPlayerManager(IPluginPlayerManager manager) {
         if (this.pluginPlayerManager != null) {
             this.pluginPlayerManager.clear();
         }
@@ -51,7 +51,7 @@ public class JellyPlugin extends JavaPlugin {
 
         this.pluginPlayerManager = manager;
 
-        for (final Player player : this.getServer().getOnlinePlayers()) {
+        for (Player player : this.getServer().getOnlinePlayers()) {
             this.pluginPlayerManager.addPlayer(player);
         }
     }

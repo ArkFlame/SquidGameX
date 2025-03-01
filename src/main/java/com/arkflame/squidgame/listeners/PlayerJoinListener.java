@@ -11,18 +11,18 @@ import com.arkflame.squidgame.player.SquidPlayer;
 import dev._2lstudios.jelly.config.Configuration;
 
 public class PlayerJoinListener implements Listener {
-    private final SquidGame plugin;
-    private final ScoreboardHook scoreboardHook;
+    private SquidGame plugin;
+    private ScoreboardHook scoreboardHook;
 
-    public PlayerJoinListener(final SquidGame plugin, final ScoreboardHook scoreboardHook) {
+    public PlayerJoinListener(SquidGame plugin, ScoreboardHook scoreboardHook) {
         this.plugin = plugin;
         this.scoreboardHook = scoreboardHook;
     }
 
     @EventHandler
-    public void onPlayerJoin(final PlayerJoinEvent e) {
-        final SquidPlayer squidPlayer = (SquidPlayer) this.plugin.getPlayerManager().getPlayer(e.getPlayer());
-        final Configuration scoreboardConfig = this.plugin.getScoreboardConfig();
+    public void onPlayerJoin(PlayerJoinEvent e) {
+        SquidPlayer squidPlayer = this.plugin.getPlayerManager().getPlayer(e.getPlayer());
+        Configuration scoreboardConfig = this.plugin.getScoreboardConfig();
 
         scoreboardHook.request(squidPlayer, scoreboardConfig.getStringList("lobby"));
 

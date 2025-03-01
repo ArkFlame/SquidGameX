@@ -7,7 +7,7 @@ import org.bukkit.WorldType;
 import org.bukkit.World.Environment;
 
 public class WorldUtils {
-    public static World getWorldSafe(final String name) {
+    public static World getWorldSafe(String name) {
         World world = Bukkit.getWorld(name);
 
         if (world == null) {

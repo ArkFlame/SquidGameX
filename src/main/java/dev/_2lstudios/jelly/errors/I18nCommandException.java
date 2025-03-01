@@ -1,9 +1,9 @@
 package dev._2lstudios.jelly.errors;
 
 public class I18nCommandException extends Exception {
-    private final String key;
+    private String key;
 
-    public I18nCommandException(final String key, final String message) {
+    public I18nCommandException(String key, String message) {
         super(message);
         this.key = key;
     }

@@ -17,7 +17,7 @@ public class ArrayUtils {
 
     public static String join(Object[] array, String joinCharacter) {
         String output = null;
-        for (final Object str : array) {
+        for (Object str : array) {
             output = output == null ? str.toString() : output + joinCharacter + str.toString();
         }
         return output;

@@ -35,7 +35,7 @@ public class SquidGame extends JellyPlugin {
 
     @Override
     public void onEnable() {
-        final PluginManager pluginManager = getServer().getPluginManager();
+        PluginManager pluginManager = getServer().getPluginManager();
 
         // Save current plugin instance as static instance
         SquidGame.instance = this;
@@ -52,7 +52,7 @@ public class SquidGame extends JellyPlugin {
         this.arenaManger = new ArenaManager(this);
         this.playerManager = new PlayerManager(this);
 
-        final ScoreboardHook scoreboardHook = new ScoreboardHook(pluginManager);
+        ScoreboardHook scoreboardHook = new ScoreboardHook(pluginManager);
 
         // Register commands
         this.addCommand(new SquidGameCommand());

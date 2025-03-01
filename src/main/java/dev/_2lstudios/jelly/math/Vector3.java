@@ -8,7 +8,7 @@ public class Vector3 {
     private double y;
     private double z;
 
-    public Vector3(final double x, final double y, final double z) {
+    public Vector3(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -26,19 +26,19 @@ public class Vector3 {
         return this.z;
     }
 
-    public Vector3 setX(final double x) {
+    public Vector3 setX(double x) {
         this.x = x;
 
         return this;
     }
 
-    public Vector3 setY(final double y) {
+    public Vector3 setY(double y) {
         this.y = y;
 
         return this;
     }
 
-    public Vector3 setZ(final double z) {
+    public Vector3 setZ(double z) {
         this.z = z;
 
         return this;
@@ -62,7 +62,7 @@ public class Vector3 {
         return this;
     }
 
-    public Location toLocation(final World world) {
+    public Location toLocation(World world) {
         return new Location(world, x, y, z);
     }
 

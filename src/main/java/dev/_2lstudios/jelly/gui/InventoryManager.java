@@ -8,15 +8,15 @@ import org.bukkit.entity.Player;
 public class InventoryManager {
     private static Map<Player, InventoryGUI> inventories = new HashMap<>();
 
-    public static void openInventory(final Player player, final InventoryGUI gui) {
+    public static void openInventory(Player player, InventoryGUI gui) {
         inventories.put(player, gui);
     }
 
-    public static void closeInventory(final Player player) {
+    public static void closeInventory(Player player) {
         inventories.remove(player);
     }
 
-    public static InventoryGUI getOpenInventory(final Player player) {
+    public static InventoryGUI getOpenInventory(Player player) {
         return inventories.get(player);
     }
 

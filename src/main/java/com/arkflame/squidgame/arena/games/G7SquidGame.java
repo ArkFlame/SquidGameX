@@ -3,7 +3,7 @@ package com.arkflame.squidgame.arena.games;
 import com.arkflame.squidgame.arena.Arena;
 
 public class G7SquidGame extends ArenaGameBase {
-    public G7SquidGame(final Arena arena, final int durationTime) {
+    public G7SquidGame(Arena arena, int durationTime) {
         super("§dSquid§fGame", "seventh", durationTime, arena);
     }
 

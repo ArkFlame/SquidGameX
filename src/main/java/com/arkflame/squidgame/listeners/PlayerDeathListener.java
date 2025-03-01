@@ -11,19 +11,19 @@ import com.arkflame.squidgame.player.SquidPlayer;
 
 public class PlayerDeathListener implements Listener {
 
-    private final SquidGame plugin;
+    private SquidGame plugin;
 
-    public PlayerDeathListener(final SquidGame plugin) {
+    public PlayerDeathListener(SquidGame plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
-    public void onPlayerDeath(final PlayerDeathEvent e) {
-        final Player bukkitPlayer = e.getEntity();
-        final SquidPlayer player = (SquidPlayer) this.plugin.getPlayerManager().getPlayer(bukkitPlayer);
+    public void onPlayerDeath(PlayerDeathEvent e) {
+        Player bukkitPlayer = e.getEntity();
+        SquidPlayer player = this.plugin.getPlayerManager().getPlayer(bukkitPlayer);
 
         if (player != null && player.getArena() != null && !player.isSpectator()) {
-            final Arena arena = player.getArena();
+            Arena arena = player.getArena();
             arena.killPlayer(player);
         }
     }

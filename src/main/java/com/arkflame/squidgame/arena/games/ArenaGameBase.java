@@ -10,12 +10,12 @@ import dev._2lstudios.jelly.config.Configuration;
 
 public abstract class ArenaGameBase {
 
-    private final String name;
-    private final String configKey;
-    private final Arena arena;
-    private final int gameTime;
+    private String name;
+    private String configKey;
+    private Arena arena;
+    private int gameTime;
 
-    public ArenaGameBase(final String name, final String configKey, final int gameTime, final Arena arena) {
+    public ArenaGameBase(String name, String configKey, int gameTime, Arena arena) {
         this.name = name;
         this.configKey = configKey;
         this.arena = arena;
@@ -23,7 +23,7 @@ public abstract class ArenaGameBase {
     }
 
     public void onExplainStart() {
-        final String key = "games." + this.configKey + ".tutorial";
+        String key = "games." + this.configKey + ".tutorial";
         this.broadcastTitleAfterSeconds(3, key + ".1.title", key + ".1.subtitle");
         this.broadcastTitleAfterSeconds(6, key + ".2.title", key + ".2.subtitle");
         this.broadcastTitleAfterSeconds(9, key + ".3.title", key + ".3.subtitle");
@@ -42,19 +42,19 @@ public abstract class ArenaGameBase {
     }
 
     public Location getSpawnPosition() {
-        final Configuration config = this.arena.getConfig();
-        final Location location = config.getLocation("games." + this.configKey + ".spawn", false);
+        Configuration config = this.arena.getConfig();
+        Location location = config.getLocation("games." + this.configKey + ".spawn", false);
         location.setWorld(this.arena.getWorld());
         return location;
     }
 
-    public void broadcastTitleAfterSeconds(int seconds, final String title, final String subtitle) {
+    public void broadcastTitleAfterSeconds(int seconds, String title, String subtitle) {
         Bukkit.getScheduler().runTaskLater(SquidGame.getInstance(), () -> {
             this.arena.broadcastTitle(title, subtitle);
         }, seconds * 20L);
     }
 
-    public void broadcastMessageAfterSeconds(int seconds, final String message) {
+    public void broadcastMessageAfterSeconds(int seconds, String message) {
         Bukkit.getScheduler().runTaskLater(SquidGame.getInstance(), () -> {
             this.arena.broadcastMessage(message);
         }, seconds * 20L);

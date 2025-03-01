@@ -16,9 +16,9 @@ public class SquidPlayer extends PluginPlayer {
     private PlayerWand wand = null;
     private boolean spectator = false;
 
-    private final SquidGame plugin;
+    private SquidGame plugin;
 
-    public SquidPlayer(final SquidGame plugin, final Player player) {
+    public SquidPlayer(SquidGame plugin, Player player) {
         super(player);
         this.plugin = plugin;
     }
@@ -27,7 +27,7 @@ public class SquidPlayer extends PluginPlayer {
         return this.wand;
     }
 
-    public PlayerWand createWand(final PlayerWand wand) {
+    public PlayerWand createWand(PlayerWand wand) {
         this.wand = wand;
         return this.wand;
     }
@@ -36,7 +36,7 @@ public class SquidPlayer extends PluginPlayer {
         return this.arena;
     }
 
-    public void setArena(final Arena arena) {
+    public void setArena(Arena arena) {
         if (arena == null && this.arena != null) {
             this.arena.removePlayer(this);
             this.arena = null;
@@ -50,7 +50,7 @@ public class SquidPlayer extends PluginPlayer {
         return this.spectator;
     }
 
-    public void setSpectator(final boolean result) {
+    public void setSpectator(boolean result) {
         this.spectator = result;
         if (result) {
             this.getBukkitPlayer().setGameMode(GameMode.SPECTATOR);
@@ -63,29 +63,29 @@ public class SquidPlayer extends PluginPlayer {
         this.teleport(this.plugin.getMainConfig().getLocation("lobby"));
     }
 
-    public String getI18n(final String key) {
+    public String getI18n(String key) {
         return this.plugin.getMessagesConfig().getString(key);
     }
 
-    private String formatMessage(final String message) {
-        final String translatedMessage = this.getI18n(message);
-        final String formatColor = ChatColor.translateAlternateColorCodes('&',
+    private String formatMessage(String message) {
+        String translatedMessage = this.getI18n(message);
+        String formatColor = ChatColor.translateAlternateColorCodes('&',
                 translatedMessage == null
                         ? "§6§lWARNING: §eMissing translation key §7" + message + " §ein message.yml file"
                         : translatedMessage);
-        final String replacedVariables = PlaceholderAPIHook.formatString(formatColor, this.getBukkitPlayer());
+        String replacedVariables = PlaceholderAPIHook.formatString(formatColor, this.getBukkitPlayer());
         return replacedVariables;
     }
 
-    public void sendMessage(final String message) {
+    public void sendMessage(String message) {
         this.getBukkitPlayer().sendMessage(this.formatMessage(message));
     }
 
-    public void sendTitle(final String title, final String subtitle, final int duration) {
+    public void sendTitle(String title, String subtitle, int duration) {
         super.sendTitle(this.formatMessage(title), this.formatMessage(subtitle), duration);
     }
 
-    public void sendScoreboard(final String scoreboardKey) {
+    public void sendScoreboard(String scoreboardKey) {
         this.plugin.getScoreboardHook().request(this.getBukkitPlayer(),
                 this.plugin.getScoreboardConfig().getStringList(scoreboardKey));
     }

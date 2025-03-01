@@ -1,7 +1,7 @@
 package dev._2lstudios.jelly.errors;
 
 public class CommandException extends Exception {
-    public CommandException(final String message) {
+    public CommandException(String message) {
         super(message);
     }
 }

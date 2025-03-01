@@ -8,32 +8,31 @@ import org.bukkit.entity.Player;
 import com.arkflame.squidgame.SquidGame;
 
 import dev._2lstudios.jelly.player.IPluginPlayerManager;
-import dev._2lstudios.jelly.player.PluginPlayer;
 
 public class PlayerManager implements IPluginPlayerManager {
 
-    private final Map<Player, SquidPlayer> players;
-    private final SquidGame plugin;
+    private Map<Player, SquidPlayer> players;
+    private SquidGame plugin;
 
-    public PlayerManager(final SquidGame plugin) {
+    public PlayerManager(SquidGame plugin) {
         this.players = new HashMap<>();
         this.plugin = plugin;
     }
 
     @Override
-    public PluginPlayer addPlayer(Player player) {
-        final SquidPlayer pluginPlayer = new SquidPlayer(this.plugin, player);
+    public SquidPlayer addPlayer(Player player) {
+        SquidPlayer pluginPlayer = new SquidPlayer(this.plugin, player);
         this.players.put(player, pluginPlayer);
         return pluginPlayer;
     }
 
     @Override
-    public PluginPlayer removePlayer(Player player) {
+    public SquidPlayer removePlayer(Player player) {
         return this.players.remove(player);
     }
 
     @Override
-    public PluginPlayer getPlayer(Player player) {
+    public SquidPlayer getPlayer(Player player) {
         return this.players.get(player);
     }
 

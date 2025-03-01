@@ -10,7 +10,7 @@ import java.util.Map;
  * Utility class for retrieving Bukkit EntityTypes across different server versions.
  */
 public class EntityTypes {
-    private static final Map<String, EntityType> CACHE = new HashMap<>();
+    private static Map<String, EntityType> CACHE = new HashMap<>();
 
     private EntityTypes() {}
 

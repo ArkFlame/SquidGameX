@@ -14,9 +14,9 @@ import dev._2lstudios.jelly.gui.InventoryGUI;
 
 public class EditArenaGame6GUI extends InventoryGUI {
 
-    private final Arena arena;
+    private Arena arena;
 
-    public EditArenaGame6GUI(final Arena arena, final InventoryGUI prevGui) {
+    public EditArenaGame6GUI(Arena arena, InventoryGUI prevGui) {
         super("§d§lArena §f" + arena.getName(), 45, prevGui);
         this.arena = arena;
     }
@@ -43,8 +43,8 @@ public class EditArenaGame6GUI extends InventoryGUI {
         }
 
         else if (id == 1 || id == 2) {
-            final SquidPlayer squidPlayer = (SquidPlayer) SquidGame.getInstance().getPlayerManager().getPlayer(player);
-            final PlayerWand wand = squidPlayer.getWand();
+            SquidPlayer squidPlayer = SquidGame.getInstance().getPlayerManager().getPlayer(player);
+            PlayerWand wand = squidPlayer.getWand();
 
             if (wand == null) {
                 player.sendMessage("§cYou don't have an region wand, use /squid wand to get it.");

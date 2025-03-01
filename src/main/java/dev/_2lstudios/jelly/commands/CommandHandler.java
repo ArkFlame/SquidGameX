@@ -18,15 +18,15 @@ import dev._2lstudios.jelly.utils.ArrayUtils;
 
 public class CommandHandler implements CommandExecutor {
 
-    private final Map<String, CommandListener> commands;
-    private final JellyPlugin plugin;
+    private Map<String, CommandListener> commands;
+    private JellyPlugin plugin;
 
-    public CommandHandler(final JellyPlugin plugin) {
+    public CommandHandler(JellyPlugin plugin) {
         this.commands = new HashMap<>();
         this.plugin = plugin;
     }
 
-    public void addCommand(final CommandListener listener) {
+    public void addCommand(CommandListener listener) {
         if (listener.getClass().isAnnotationPresent(Command.class)) {
             Command command = listener.getClass().getAnnotation(Command.class);
             this.commands.put(command.name(), listener);
@@ -76,14 +76,14 @@ public class CommandHandler implements CommandExecutor {
         }
 
         // Parse arguments
-        final Object[] argList = new Object[args.length];
-        final int argumentDefinedLength = command.arguments().length;
+        Object[] argList = new Object[args.length];
+        int argumentDefinedLength = command.arguments().length;
 
         for (int i = 0; i < args.length; i++) {
             if (argumentDefinedLength >= (i + 1)) {
-                final Class<?> clazz = command.arguments()[i];
+                Class<?> clazz = command.arguments()[i];
                 try {
-                    final Object arg = CommandArgumentParser.parse(clazz, i + 1, args[i]);
+                    Object arg = CommandArgumentParser.parse(clazz, i + 1, args[i]);
                     argList[i] = arg;
                 } catch (Exception e) {
                     sender.sendMessage("§cUsage: " + command.usage());
@@ -96,15 +96,15 @@ public class CommandHandler implements CommandExecutor {
         }
 
         // Execute command
-        final CommandArguments arguments = new CommandArguments(argList);
-        final CommandContext context = new CommandContext(this.plugin, sender, arguments);
+        CommandArguments arguments = new CommandArguments(argList);
+        CommandContext context = new CommandContext(this.plugin, sender, arguments);
 
         try {
             listener.handle(context);
         } catch (Exception e) {
             if (e instanceof I18nCommandException && sender instanceof Player) {
-                final SquidPlayer player = (SquidPlayer) context.getPluginPlayer();
-                final I18nCommandException i18nE = (I18nCommandException) e;
+                SquidPlayer player = (SquidPlayer) context.getPluginPlayer();
+                I18nCommandException i18nE = (I18nCommandException) e;
                 player.sendMessage(i18nE.getKey());
             } else if (e instanceof CommandException) {
                 sender.sendMessage("§c" + e.getMessage());

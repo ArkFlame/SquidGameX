@@ -21,9 +21,9 @@ import dev._2lstudios.jelly.commands.CommandListener;
 public class SquidWandCommand extends CommandListener {
     @Override
     public void handle(CommandContext context) throws NoAvailableArenaException, ArenaMisconfiguredException {
-        final ItemStack item = new ItemStack(Materials.get("BLAZE_ROD"));
-        final ItemMeta meta = item.getItemMeta();
-        final List<String> lore = new ArrayList<>();
+        ItemStack item = new ItemStack(Materials.get("BLAZE_ROD"));
+        ItemMeta meta = item.getItemMeta();
+        List<String> lore = new ArrayList<>();
 
         lore.add("§7");
         lore.add("§aLeft-click: §eSet first point.");

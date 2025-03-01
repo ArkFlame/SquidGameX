@@ -20,20 +20,20 @@ import dev._2lstudios.jelly.utils.BlockUtils;
 
 public class PlayerMoveListener implements Listener {
 
-    private final SquidGame plugin;
+    private SquidGame plugin;
 
-    public PlayerMoveListener(final SquidGame plugin) {
+    public PlayerMoveListener(SquidGame plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onPlayerMove(final PlayerMoveEvent e) {
+    public void onPlayerMove(PlayerMoveEvent e) {
         if (e.getFrom().distance(e.getTo()) <= 0.015) {
             return;
         }
 
-        final SquidPlayer player = (SquidPlayer) this.plugin.getPlayerManager().getPlayer(e.getPlayer());
-        final Arena arena = player.getArena();
+        SquidPlayer player = this.plugin.getPlayerManager().getPlayer(e.getPlayer());
+        Arena arena = player.getArena();
 
         if (arena == null || player.isSpectator()) {
             return;
@@ -41,7 +41,7 @@ public class PlayerMoveListener implements Listener {
 
         /* Game 1: Handling */
         if (arena.getCurrentGame() instanceof G1RedGreenLightGame) {
-            final G1RedGreenLightGame game = (G1RedGreenLightGame) arena.getCurrentGame();
+            G1RedGreenLightGame game = (G1RedGreenLightGame) arena.getCurrentGame();
 
             if (arena.getState() == ArenaState.EXPLAIN_GAME) {
                 if (game.getBarrier().isBetween(e.getTo())) {
@@ -52,7 +52,7 @@ public class PlayerMoveListener implements Listener {
 
             else if (arena.getState() == ArenaState.IN_GAME) {
                 if (!game.isCanWalk()) {
-                    final Vector3 playerPosition = new Vector3(e.getTo().getX(), e.getTo().getY(), e.getTo().getZ());
+                    Vector3 playerPosition = new Vector3(e.getTo().getX(), e.getTo().getY(), e.getTo().getZ());
                     if (game.getKillZone().isBetween(playerPosition)) {
                         arena.killPlayer(player);
                     }
@@ -62,11 +62,11 @@ public class PlayerMoveListener implements Listener {
 
         /* Game 6: Handling */
         else if (arena.getCurrentGame() instanceof G6GlassesGame) {
-            final Location loc = e.getTo().clone().subtract(0, 1, 0);
-            final Block block = loc.getBlock();
+            Location loc = e.getTo().clone().subtract(0, 1, 0);
+            Block block = loc.getBlock();
 
             if (block != null && block.getType() == Materials.get("GLASS")) {
-                final G6GlassesGame game = (G6GlassesGame) arena.getCurrentGame();
+                G6GlassesGame game = (G6GlassesGame) arena.getCurrentGame();
 
                 if (game.isFakeBlock(loc.getBlock())) {
                     BlockUtils.destroyBlockGroup(loc.getBlock());
@@ -78,8 +78,8 @@ public class PlayerMoveListener implements Listener {
 
         /* Game 7: Handling */
         else if (arena.getCurrentGame() instanceof G7SquidGame) {
-            final Location loc = e.getTo().clone();
-            final String killBlock = arena.getConfig().getString("games.seventh.kill-block", "sand");
+            Location loc = e.getTo().clone();
+            String killBlock = arena.getConfig().getString("games.seventh.kill-block", "sand");
 
             loc.subtract(0, 1, 0);
 

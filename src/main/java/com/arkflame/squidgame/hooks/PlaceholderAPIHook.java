@@ -10,10 +10,10 @@ import com.arkflame.squidgame.arena.Arena;
 import com.arkflame.squidgame.player.SquidPlayer;
 
 public class PlaceholderAPIHook extends PlaceholderExpansion {
-    private final SquidGame plugin;
+    private SquidGame plugin;
     private static boolean enabled = false;
 
-    public PlaceholderAPIHook(final SquidGame plugin) {
+    public PlaceholderAPIHook(SquidGame plugin) {
         this.plugin = plugin;
         enabled = true;
     }
@@ -35,7 +35,7 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
     }
 
     /* Static Formatter */
-    public static String formatString(final String text, final Player player) {
+    public static String formatString(String text, Player player) {
         if (enabled) {
             return PlaceholderAPI.setPlaceholders(player, text);
         } else {
@@ -44,7 +44,7 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
     }
 
     /* Formatters */
-    private String requestPlayerPlaceholder(final SquidPlayer player, final String identifier) {
+    private String requestPlayerPlaceholder(SquidPlayer player, String identifier) {
         switch (identifier) {
             case "wins":
                 return "0";
@@ -55,7 +55,7 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
         }
     }
 
-    private String requestArenaPlaceholder(final Arena arena, final String identifier) {
+    private String requestArenaPlaceholder(Arena arena, String identifier) {
         switch (identifier) {
             case "death":
                 return arena.getDeathPlayer() != null ? arena.getDeathPlayer() : "None";
@@ -66,8 +66,8 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
             case "players":
                 return arena.getPlayers().size() + "";
             case "winner":
-                final SquidPlayer winner = arena.calculateWinner();
-                final String name = winner != null ? winner.getBukkitPlayer().getName() : "None";
+                SquidPlayer winner = arena.calculateWinner();
+                String name = winner != null ? winner.getBukkitPlayer().getName() : "None";
                 return name;
             case "maxplayers":
                 return arena.getMaxPlayers() + "";
@@ -92,14 +92,14 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
             return "";
         }
 
-        final SquidPlayer squidPlayer = (SquidPlayer) this.plugin.getPlayerManager().getPlayer(player);
+        SquidPlayer squidPlayer = this.plugin.getPlayerManager().getPlayer(player);
 
         if (identifier.startsWith("player_")) {
             return this.requestPlayerPlaceholder(squidPlayer, identifier.split("_")[1]);
         }
 
         else if (identifier.startsWith("arena_")) {
-            final Arena arena = squidPlayer != null ? squidPlayer.getArena() : null;
+            Arena arena = squidPlayer != null ? squidPlayer.getArena() : null;
             if (arena == null) {
                 return "";
             }

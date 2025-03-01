@@ -14,9 +14,9 @@ import dev._2lstudios.jelly.commands.CommandListener;
 public class SquidLeaveCommand extends CommandListener {
     @Override
     public void handle(CommandContext context) throws NoAvailableArenaException, ArenaMisconfiguredException {
-        final SquidPlayer player = (SquidPlayer) context.getPluginPlayer();
+        SquidPlayer player = (SquidPlayer) context.getPluginPlayer();
 
-        final Arena arena = player.getArena();
+        Arena arena = player.getArena();
         if (arena != null) {
             arena.removePlayer(player);
         } else {

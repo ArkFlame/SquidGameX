@@ -4,9 +4,9 @@ import java.util.Random;
 
 public class NumberUtils {
 
-    final static private String[] numberNames = new String[] { "Zero", "First", "Second", "Third", "Fourth" };
+    static private String[] numberNames = new String[] { "Zero", "First", "Second", "Third", "Fourth" };
 
-    public static String formatNumber(final int number) {
+    public static String formatNumber(int number) {
         if (NumberUtils.numberNames.length < number) {
             return String.valueOf(number);
         } else {
@@ -14,7 +14,7 @@ public class NumberUtils {
         }
     }
 
-    public static int randomNumber(final int min, final int max) {
+    public static int randomNumber(int min, int max) {
         if (min >= max) {
             throw new IllegalArgumentException("max must be greater than min");
         }

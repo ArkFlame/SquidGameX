@@ -26,7 +26,7 @@ public class G6GlassesGame extends ArenaGameBase {
 
     private List<Block> fakeBlocks;
 
-    public G6GlassesGame(final Arena arena, final int durationTime) {
+    public G6GlassesGame(Arena arena, int durationTime) {
         super("§bGlasses", "sixth", durationTime, arena);
 
         this.fakeBlocks = new ArrayList<>();
@@ -48,51 +48,51 @@ public class G6GlassesGame extends ArenaGameBase {
         return this.goalZone;
     }
 
-    public boolean isFakeBlock(final Block block) {
+    public boolean isFakeBlock(Block block) {
         return this.fakeBlocks.contains(block);
     }
 
-    private void generateTiles(final Material material) {
-        final World world = this.getArena().getWorld();
+    private void generateTiles(Material material) {
+        World world = this.getArena().getWorld();
 
-        final Vector3 first = this.getGlassZone().getFirstPoint();
-        final Vector3 second = this.getGlassZone().getSecondPoint();
+        Vector3 first = this.getGlassZone().getFirstPoint();
+        Vector3 second = this.getGlassZone().getSecondPoint();
 
         world.getBlockAt(first.toLocation(world)).setType(Materials.get("GLASS"));
         world.getBlockAt(second.toLocation(world)).setType(Materials.get("GLASS"));
 
         // Obtener diferencia entre puntos X
-        final int differenceBetweenX = (int) Math.abs(first.getX() - second.getX());
+        int differenceBetweenX = (int) Math.abs(first.getX() - second.getX());
         // Obtener diferencia entre puntos Z
-        final int differenceBetweenZ = (int) Math.abs(first.getZ() - second.getZ());
+        int differenceBetweenZ = (int) Math.abs(first.getZ() - second.getZ());
         // Verificar si se debe usar el Z como un indice
-        final boolean useZAsIndex = differenceBetweenZ > differenceBetweenX;
+        boolean useZAsIndex = differenceBetweenZ > differenceBetweenX;
         // Verificar si se debe aumentar o restar el valor indice
-        final boolean shouldIncreaseIndex = useZAsIndex ? first.getZ() < second.getZ() : first.getX() < second.getX();
+        boolean shouldIncreaseIndex = useZAsIndex ? first.getZ() < second.getZ() : first.getX() < second.getX();
 
         // Obtener el width del suelo dependiendo hacia donde esté señalando el area
-        final int groundWidth = (useZAsIndex ? differenceBetweenX : differenceBetweenZ) + 1;
+        int groundWidth = (useZAsIndex ? differenceBetweenX : differenceBetweenZ) + 1;
         // Obtener el height del suelo dependiendo hacia donde esté señalando el area
-        final int groundHeight = (useZAsIndex ? differenceBetweenZ : differenceBetweenX) + 1;
+        int groundHeight = (useZAsIndex ? differenceBetweenZ : differenceBetweenX) + 1;
 
         // Parametros de las paltaformas
-        final int size = groundWidth < 5 ? 1 : groundWidth < 7 ? 2 : 3;
-        final int spaceXBetweenPlatforms = groundWidth - (size * 2);
-        final int spaceZBetweenPlatforms = 3;
+        int size = groundWidth < 5 ? 1 : groundWidth < 7 ? 2 : 3;
+        int spaceXBetweenPlatforms = groundWidth - (size * 2);
+        int spaceZBetweenPlatforms = 3;
 
         // Indice de bloque (Incrementa o decrementa relativamente a la dirección de
         // generación)
         int blockIndex = (int) (useZAsIndex ? first.getZ() : first.getX());
 
         // Inicio del X, valor inmutable y absoluto.
-        final int xStart = Math.min((int) first.getX(), (int) second.getX());
+        int xStart = Math.min((int) first.getX(), (int) second.getX());
         // Inicio del Y, valor inmutable y absoluto
-        final int yStart = (int) first.getY();
+        int yStart = (int) first.getY();
         // Inicio del Z, valor inmutable y absoluto.
-        final int zStart = Math.max((int) first.getZ(), (int) second.getZ());
+        int zStart = Math.max((int) first.getZ(), (int) second.getZ());
 
         // Obtener el número de pares de plataformas a generar dependiendo el tamaño
-        final int platformGroups = groundHeight / (spaceZBetweenPlatforms + size);
+        int platformGroups = groundHeight / (spaceZBetweenPlatforms + size);
 
         // Por cada grupo de plataforma (+ 1) iterar:
         for (int i = 0; i <= platformGroups; i++) {
@@ -144,7 +144,7 @@ public class G6GlassesGame extends ArenaGameBase {
                 }
             }
 
-            final int separation = spaceZBetweenPlatforms + size;
+            int separation = spaceZBetweenPlatforms + size;
             blockIndex = shouldIncreaseIndex ? blockIndex + separation : blockIndex - separation;
         }
     }
@@ -166,13 +166,13 @@ public class G6GlassesGame extends ArenaGameBase {
 
         this.getArena().broadcastTitle("events.game-timeout.title", "events.game-timeout.subtitle");
 
-        final List<SquidPlayer> alive = new ArrayList<>();
-        final List<SquidPlayer> death = new ArrayList<>();
+        List<SquidPlayer> alive = new ArrayList<>();
+        List<SquidPlayer> death = new ArrayList<>();
 
-        for (final SquidPlayer squidPlayer : this.getArena().getPlayers()) {
-            final Player player = squidPlayer.getBukkitPlayer();
-            final Location location = player.getLocation();
-            final Vector3 position = new Vector3(location.getX(), location.getY(), location.getZ());
+        for (SquidPlayer squidPlayer : this.getArena().getPlayers()) {
+            Player player = squidPlayer.getBukkitPlayer();
+            Location location = player.getLocation();
+            Vector3 position = new Vector3(location.getX(), location.getY(), location.getZ());
 
             if (this.getGoalZone().isBetween(position)) {
                 alive.add(squidPlayer);
@@ -182,13 +182,13 @@ public class G6GlassesGame extends ArenaGameBase {
         }
 
         Bukkit.getScheduler().runTaskLater(SquidGame.getInstance(), () -> {
-            for (final SquidPlayer player : death) {
+            for (SquidPlayer player : death) {
                 player.sendTitle("events.game-timeout-died.title", "events.game-timeout-died.subtitle", 3);
                 player.playSound(
                         this.getArena().getMainConfig().getSound("game-settings.sounds.player-loss-game", "CAT_HIT"));
             }
 
-            for (final SquidPlayer player : alive) {
+            for (SquidPlayer player : alive) {
                 player.sendTitle("events.game-pass.title", "events.game-pass.subtitle", 3);
                 player.playSound(
                         this.getArena().getMainConfig().getSound("game-settings.sounds.player-pass-game", "LEVELUP"));
@@ -196,7 +196,7 @@ public class G6GlassesGame extends ArenaGameBase {
         }, 40L);
 
         Bukkit.getScheduler().runTaskLater(SquidGame.getInstance(), () -> {
-            for (final SquidPlayer squidPlayer : death) {
+            for (SquidPlayer squidPlayer : death) {
                 this.getArena().killPlayer(squidPlayer);
             }
         }, 80L);

@@ -18,10 +18,10 @@ import dev._2lstudios.jelly.config.Configuration;
 
 public class ArenaManager {
 
-    private final List<Arena> arenas;
-    private final File arenasPath;
+    private List<Arena> arenas;
+    private File arenasPath;
 
-    public ArenaManager(final SquidGame plugin) {
+    public ArenaManager(SquidGame plugin) {
         this.arenas = new ArrayList<>();
         this.arenasPath = new File(plugin.getDataFolder(), "arenas");
 
@@ -37,30 +37,30 @@ public class ArenaManager {
     }
 
     public void scanForArenas() throws IOException {
-        for (final File fileEntry : this.arenasPath.listFiles()) {
+        for (File fileEntry : this.arenasPath.listFiles()) {
             if (!fileEntry.isDirectory() && fileEntry.getName().endsWith(".yml")) {
-                final Configuration arenaConfig = new Configuration(fileEntry);
+                Configuration arenaConfig = new Configuration(fileEntry);
 
                 try {
                     arenaConfig.load();
                 } catch (Exception e) {
                 }
 
-                final String name = fileEntry.getName().split("[.]")[0];
+                String name = fileEntry.getName().split("[.]")[0];
 
                 World world = Bukkit.getWorld(arenaConfig.getString("arena.world"));
                 if (world == null) {
                     world = new WorldCreator(arenaConfig.getString("arena.world")).createWorld();
                 }
 
-                final Arena arena = new Arena(world, name, arenaConfig);
+                Arena arena = new Arena(world, name, arenaConfig);
                 this.arenas.add(arena);
             }
         }
     }
 
-    public Arena getArena(final String name) {
-        for (final Arena arena : this.arenas) {
+    public Arena getArena(String name) {
+        for (Arena arena : this.arenas) {
             if (arena.getName().equalsIgnoreCase(name)) {
                 return arena;
             }
@@ -69,13 +69,13 @@ public class ArenaManager {
         return null;
     }
 
-    public Arena createArena(final String name, final World world) throws ArenaAlreadyExistException, IOException {
+    public Arena createArena(String name, World world) throws ArenaAlreadyExistException, IOException {
         if (this.getArena(name) != null) {
             throw new ArenaAlreadyExistException(name);
         }
 
-        final Configuration arenaConfig = new Configuration(new File(this.arenasPath, name + ".yml"));
-        final Arena arena = new Arena(world, name, arenaConfig);
+        Configuration arenaConfig = new Configuration(new File(this.arenasPath, name + ".yml"));
+        Arena arena = new Arena(world, name, arenaConfig);
         arenaConfig.set("arena.world", world.getName());
         arenaConfig.save();
         this.arenas.add(arena);
@@ -83,7 +83,7 @@ public class ArenaManager {
     }
 
     public Arena getFirstAvailableArena() throws NoAvailableArenaException, ArenaMisconfiguredException {
-        for (final Arena arena : arenas) {
+        for (Arena arena : arenas) {
             if (arena.getState() == ArenaState.WAITING || arena.getState() == ArenaState.STARTING) {
                 return arena;
             }

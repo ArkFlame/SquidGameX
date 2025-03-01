@@ -9,9 +9,9 @@ import dev._2lstudios.jelly.gui.InventoryGUI;
 
 public class EditArenaGUI extends InventoryGUI {
 
-    private final Arena arena;
+    private Arena arena;
 
-    public EditArenaGUI(final Arena arena) {
+    public EditArenaGUI(Arena arena) {
         super("§d§lArena §f" + arena.getName(), 5 * 9);
         this.arena = arena;
     }
@@ -31,7 +31,7 @@ public class EditArenaGUI extends InventoryGUI {
 
         this.addItem(6, this.createItem("§eSixth game", Materials.get("GLASS"), "§r\n§bGlass §fGame§7.\n§r"), 7, 2);
         this.addItem(7,
-                this.createItem("§eSeventh game", Materials.get("STICK"), "§r\n§dSquid§fGame§7, is the Final game.\n§r"), 8, 2);
+                this.createItem("§eSeventh game", Materials.get("STICK"), "§r\n§dSquid§fGame§7, is the game.\n§r"), 8, 2);
         this.addItem(0,
                 this.createItem("§bIntermission", Materials.get("COMPASS"), "§r\n§7Where players spawn after each game.\n§r"),
                 4, 4);

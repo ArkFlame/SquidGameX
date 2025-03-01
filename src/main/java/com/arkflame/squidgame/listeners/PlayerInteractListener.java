@@ -12,18 +12,18 @@ import com.arkflame.squidgame.utils.Materials;
 
 public class PlayerInteractListener implements Listener {
 
-    private final SquidGame plugin;
+    private SquidGame plugin;
 
-    public PlayerInteractListener(final SquidGame plugin) {
+    public PlayerInteractListener(SquidGame plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
-    public void onPlayerInteract(final PlayerInteractEvent e) {
-        final SquidPlayer player = (SquidPlayer) this.plugin.getPlayerManager().getPlayer(e.getPlayer());
+    public void onPlayerInteract(PlayerInteractEvent e) {
+        SquidPlayer player = this.plugin.getPlayerManager().getPlayer(e.getPlayer());
 
         if (player.getWand() != null && e.getItem() != null && e.getItem().getType().equals(Materials.get("BLAZE_ROD"))) {
-            final PlayerWand wand = player.getWand();
+            PlayerWand wand = player.getWand();
 
             if (e.getAction() == Action.LEFT_CLICK_BLOCK) {
                 wand.setFirstPoint(e.getClickedBlock().getLocation());

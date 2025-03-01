@@ -9,7 +9,7 @@ import dev._2lstudios.jelly.gui.InventoryManager;
 
 public class InventoryCloseListener implements Listener {
     @EventHandler
-    public void onInventoryClose(final InventoryCloseEvent e) {
+    public void onInventoryClose(InventoryCloseEvent e) {
         InventoryManager.closeInventory((Player) e.getPlayer());
     }
 }

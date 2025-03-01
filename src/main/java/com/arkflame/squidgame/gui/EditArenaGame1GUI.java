@@ -15,9 +15,9 @@ import dev._2lstudios.jelly.gui.InventoryGUI;
 
 public class EditArenaGame1GUI extends InventoryGUI {
 
-    private final Arena arena;
+    private Arena arena;
 
-    public EditArenaGame1GUI(final Arena arena, final InventoryGUI prevGui) {
+    public EditArenaGame1GUI(Arena arena, InventoryGUI prevGui) {
         super("§d§lArena §f" + arena.getName(), 45, prevGui);
         this.arena = arena;
     }
@@ -36,9 +36,9 @@ public class EditArenaGame1GUI extends InventoryGUI {
 
     @Override
     public void handle(int id, Player player) {
-        final PlayerManager pm = SquidGame.getInstance().getPlayerManager();
-        final SquidPlayer squidPlayer = (SquidPlayer) pm.getPlayer(player);
-        final PlayerWand wand = squidPlayer.getWand();
+        PlayerManager pm = SquidGame.getInstance().getPlayerManager();
+        SquidPlayer squidPlayer = pm.getPlayer(player);
+        PlayerWand wand = squidPlayer.getWand();
 
         if (id == 99) {
             this.back(player);

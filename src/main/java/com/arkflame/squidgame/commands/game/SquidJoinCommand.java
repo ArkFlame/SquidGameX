@@ -15,13 +15,13 @@ import dev._2lstudios.jelly.commands.CommandListener;
 public class SquidJoinCommand extends CommandListener {
     @Override
     public void handle(CommandContext context) throws NoAvailableArenaException, ArenaMisconfiguredException {
-        final SquidGame plugin = (SquidGame) context.getPlugin();
-        final SquidPlayer player = (SquidPlayer) context.getPluginPlayer();
+        SquidGame plugin = (SquidGame) context.getPlugin();
+        SquidPlayer player = (SquidPlayer) context.getPluginPlayer();
 
         if (player.getArena() != null) {
             player.sendMessage("arena.already-in-game");
         } else {
-            final Arena arena = plugin.getArenaManager().getFirstAvailableArena();
+            Arena arena = plugin.getArenaManager().getFirstAvailableArena();
             arena.addPlayer(player);
         }
     }

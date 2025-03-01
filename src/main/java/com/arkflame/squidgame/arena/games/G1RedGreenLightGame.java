@@ -24,7 +24,7 @@ public class G1RedGreenLightGame extends ArenaGameBase {
     private boolean canWalk = true;
     private boolean playing = false;
 
-    public G1RedGreenLightGame(final Arena arena, final int durationTime) {
+    public G1RedGreenLightGame(Arena arena, int durationTime) {
         super("§aGreen Light §7| §cRed Light", "first", durationTime, arena);
     }
 
@@ -57,7 +57,7 @@ public class G1RedGreenLightGame extends ArenaGameBase {
             return;
         }
 
-        final int time = NumberUtils.randomNumber(2, 5);
+        int time = NumberUtils.randomNumber(2, 5);
         this.getArena().broadcastTitle("games.first.green-light.title", "games.first.green-light.subtitle");
         this.getArena().broadcastSound(
                 this.getArena().getMainConfig().getSound("game-settings.sounds.green-light", "GHAST_MOAN"));
@@ -69,7 +69,7 @@ public class G1RedGreenLightGame extends ArenaGameBase {
                     this.getArena().getMainConfig().getSound("game-settings.sounds.red-light", "BLAZE_HIT"));
             Bukkit.getScheduler().runTaskLater(SquidGame.getInstance(), () -> {
                 this.canWalk = false;
-                final int waitTime = NumberUtils.randomNumber(2, 5);
+                int waitTime = NumberUtils.randomNumber(2, 5);
                 Bukkit.getScheduler().runTaskLater(SquidGame.getInstance(), () -> {
                     singDoll();
                 }, waitTime * 20);
@@ -97,13 +97,13 @@ public class G1RedGreenLightGame extends ArenaGameBase {
 
         this.getArena().broadcastTitle("events.game-timeout.title", "events.game-timeout.subtitle");
 
-        final List<SquidPlayer> death = new ArrayList<>();
-        final List<SquidPlayer> alive = new ArrayList<>();
+        List<SquidPlayer> death = new ArrayList<>();
+        List<SquidPlayer> alive = new ArrayList<>();
 
-        for (final SquidPlayer squidPlayer : this.getArena().getPlayers()) {
-            final Player player = squidPlayer.getBukkitPlayer();
-            final Location location = player.getLocation();
-            final Vector3 position = new Vector3(location.getX(), location.getY(), location.getZ());
+        for (SquidPlayer squidPlayer : this.getArena().getPlayers()) {
+            Player player = squidPlayer.getBukkitPlayer();
+            Location location = player.getLocation();
+            Vector3 position = new Vector3(location.getX(), location.getY(), location.getZ());
 
             if (this.getGoalZone().isBetween(position)) {
                 alive.add(squidPlayer);
@@ -113,13 +113,13 @@ public class G1RedGreenLightGame extends ArenaGameBase {
         }
 
         Bukkit.getScheduler().runTaskLater(SquidGame.getInstance(), () -> {
-            for (final SquidPlayer player : death) {
+            for (SquidPlayer player : death) {
                 player.sendTitle("events.game-timeout-died.title", "events.game-timeout-died.subtitle", 3);
                 player.playSound(
                         this.getArena().getMainConfig().getSound("game-settings.sounds.player-loss-game", "CAT_HIT"));
             }
 
-            for (final SquidPlayer player : alive) {
+            for (SquidPlayer player : alive) {
                 player.sendTitle("events.game-pass.title", "events.game-pass.subtitle", 3);
                 player.playSound(
                         this.getArena().getMainConfig().getSound("game-settings.sounds.player-pass-game", "LEVELUP"));
@@ -127,7 +127,7 @@ public class G1RedGreenLightGame extends ArenaGameBase {
         }, 40L);
 
         Bukkit.getScheduler().runTaskLater(SquidGame.getInstance(), () -> {
-            for (final SquidPlayer squidPlayer : death) {
+            for (SquidPlayer squidPlayer : death) {
                 this.getArena().killPlayer(squidPlayer);
             }
         }, 80L);

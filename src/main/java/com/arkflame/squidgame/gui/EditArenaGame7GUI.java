@@ -11,9 +11,9 @@ import dev._2lstudios.jelly.gui.InventoryGUI;
 
 public class EditArenaGame7GUI extends InventoryGUI {
 
-    private final Arena arena;
+    private Arena arena;
 
-    public EditArenaGame7GUI(final Arena arena, final InventoryGUI prevGui) {
+    public EditArenaGame7GUI(Arena arena, InventoryGUI prevGui) {
         super("§d§lArena §f" + arena.getName(), 45, prevGui);
         this.arena = arena;
     }

@@ -7,12 +7,12 @@ import org.bukkit.block.BlockFace;
 import com.arkflame.squidgame.utils.Materials;
 
 public class BlockUtils {
-    public static void destroyBlockGroup(final Block block, final boolean useParticles) {
-        final Material target = block.getType();
-        final Block up = block.getRelative(BlockFace.SOUTH);
-        final Block down = block.getRelative(BlockFace.NORTH);
-        final Block left = block.getRelative(BlockFace.EAST);
-        final Block right = block.getRelative(BlockFace.WEST);
+    public static void destroyBlockGroup(Block block, boolean useParticles) {
+        Material target = block.getType();
+        Block up = block.getRelative(BlockFace.SOUTH);
+        Block down = block.getRelative(BlockFace.NORTH);
+        Block left = block.getRelative(BlockFace.EAST);
+        Block right = block.getRelative(BlockFace.WEST);
 
         if (useParticles) {
             block.breakNaturally();
@@ -37,7 +37,7 @@ public class BlockUtils {
         }
     }
 
-    public static void destroyBlockGroup(final Block block) {
+    public static void destroyBlockGroup(Block block) {
         destroyBlockGroup(block, true);
     }
 }

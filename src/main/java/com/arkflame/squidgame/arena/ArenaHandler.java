@@ -12,21 +12,21 @@ import com.arkflame.squidgame.player.SquidPlayer;
 import dev._2lstudios.jelly.config.Configuration;
 
 public class ArenaHandler {
-    private final Arena arena;
-    private final Configuration mainConfig;
+    private Arena arena;
+    private Configuration mainConfig;
 
-    public ArenaHandler(final Arena arena) {
+    public ArenaHandler(Arena arena) {
         this.arena = arena;
         this.mainConfig = SquidGame.getInstance().getMainConfig();
     }
 
     public void handleArenaSwitchState() {
-        final ArenaState state = this.arena.getState();
-        final String scoreboardKey = state.toString().toLowerCase();
+        ArenaState state = this.arena.getState();
+        String scoreboardKey = state.toString().toLowerCase();
         this.arena.broadcastScoreboard(scoreboardKey);
     }
 
-    public void handlePlayerJoin(final SquidPlayer player) {
+    public void handlePlayerJoin(SquidPlayer player) {
         arena.broadcastMessage("arena.join");
         player.sendScoreboard(this.arena.getState().toString().toLowerCase());
 
@@ -39,7 +39,7 @@ public class ArenaHandler {
         }
     }
 
-    public void handlePlayerLeave(final SquidPlayer player) {
+    public void handlePlayerLeave(SquidPlayer player) {
         if (this.arena.getState() == ArenaState.FINISHING_ARENA) {
             return;
         }
@@ -110,7 +110,7 @@ public class ArenaHandler {
         }
 
         else if (arena.getState() == ArenaState.FINISHING_ARENA) {
-            final SquidPlayer winner = this.arena.calculateWinner();
+            SquidPlayer winner = this.arena.calculateWinner();
             if (winner != null && this.mainConfig.getBoolean("game-settings.spawn-fireworks-on-win", true)) {
                 winner.spawnFirework(1, 1, Color.RED, true);
             }
@@ -121,7 +121,7 @@ public class ArenaHandler {
         }
     }
 
-    public void handleArenaFinish(final ArenaFinishReason reason) {
+    public void handleArenaFinish(ArenaFinishReason reason) {
         this.arena.setInternalTime(this.mainConfig.getInt("game-settings.finishing-time", 5));
 
         switch (reason) {
@@ -132,10 +132,10 @@ public class ArenaHandler {
             this.arena.broadcastTitle("events.finish.winner.title", "events.finish.winner.subtitle");
 
             // Give rewards
-            final List<String> rewardCommands = this.mainConfig.getStringList("game-settings.rewards",
+            List<String> rewardCommands = this.mainConfig.getStringList("game-settings.rewards",
                     new ArrayList<>());
 
-            for (final String reward : rewardCommands) {
+            for (String reward : rewardCommands) {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
                         reward.replace("{winner}", arena.calculateWinner().getBukkitPlayer().getName()));
             }

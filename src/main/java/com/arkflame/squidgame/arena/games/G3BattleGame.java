@@ -11,17 +11,17 @@ import dev._2lstudios.jelly.config.Configuration;
 
 public class G3BattleGame extends ArenaGameBase {
 
-    private final int durationTime;
+    private int durationTime;
 
-    public G3BattleGame(final Arena arena, final int durationTime) {
+    public G3BattleGame(Arena arena, int durationTime) {
         super("§cBattle", "third", durationTime, arena);
         this.durationTime = durationTime;
     }
 
     @Override
     public Location getSpawnPosition() {
-        final Configuration config = this.getArena().getConfig();
-        final Location location = config.getLocation("arena.waiting_room", false);
+        Configuration config = this.getArena().getConfig();
+        Location location = config.getLocation("arena.waiting_room", false);
         location.setWorld(this.getArena().getWorld());
         return location;
     }
@@ -47,7 +47,7 @@ public class G3BattleGame extends ArenaGameBase {
     public void onTimeUp() {
         this.getArena().setPvPAllowed(false);
 
-        for (final SquidPlayer alivePlayer : this.getArena().getPlayers()) {
+        for (SquidPlayer alivePlayer : this.getArena().getPlayers()) {
             alivePlayer.sendTitle("events.game-pass.title", "events.game-pass.subtitle", 2);
         }
     }

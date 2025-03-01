@@ -14,19 +14,19 @@ import com.arkflame.squidgame.player.SquidPlayer;
 
 public class EntityDamageListener implements Listener {
 
-    private final SquidGame plugin;
+    private SquidGame plugin;
 
-    public EntityDamageListener(final SquidGame plugin) {
+    public EntityDamageListener(SquidGame plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onEntityDamage(final EntityDamageEvent e) {
-        final Entity entity = e.getEntity();
+    public void onEntityDamage(EntityDamageEvent e) {
+        Entity entity = e.getEntity();
         if (entity instanceof Player) {
-            final SquidPlayer player = (SquidPlayer) this.plugin.getPlayerManager().getPlayer((Player) entity);
+            SquidPlayer player = this.plugin.getPlayerManager().getPlayer((Player) entity);
             if (player != null && player.getArena() != null) {
-                final Arena arena = player.getArena();
+                Arena arena = player.getArena();
 
                 if (e.getCause() == DamageCause.FALL && arena.getState() != ArenaState.IN_GAME) {
                     e.setCancelled(true);

@@ -8,15 +8,15 @@ import com.arkflame.squidgame.SquidGame;
 import com.arkflame.squidgame.player.SquidPlayer;
 
 public class PlayerQuitListener implements Listener {
-    private final SquidGame plugin;
+    private SquidGame plugin;
 
-    public PlayerQuitListener(final SquidGame plugin) {
+    public PlayerQuitListener(SquidGame plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
-    public void onPlayerQuit(final PlayerQuitEvent e) {
-        final SquidPlayer squidPlayer = (SquidPlayer) this.plugin.getPlayerManager().getPlayer(e.getPlayer());
+    public void onPlayerQuit(PlayerQuitEvent e) {
+        SquidPlayer squidPlayer = this.plugin.getPlayerManager().getPlayer(e.getPlayer());
         if (squidPlayer != null && squidPlayer.getArena() != null) {
             squidPlayer.getArena().removePlayer(squidPlayer);
         }

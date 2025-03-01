@@ -5,15 +5,15 @@ import com.arkflame.squidgame.arena.Arena;
 
 public class ArenaTickTask implements Runnable {
 
-    private final SquidGame plugin;
+    private SquidGame plugin;
 
-    public ArenaTickTask(final SquidGame plugin) {
+    public ArenaTickTask(SquidGame plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public void run() {
-        for (final Arena arena : this.plugin.getArenaManager().getArenas()) {
+        for (Arena arena : this.plugin.getArenaManager().getArenas()) {
             arena.doArenaTick();
         }
     }

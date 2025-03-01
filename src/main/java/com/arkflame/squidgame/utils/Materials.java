@@ -10,7 +10,7 @@ import java.util.Map;
  * Utility class for retrieving Bukkit Materials across different server versions.
  */
 public class Materials {
-    private static final Map<String, Material> CACHE = new HashMap<>();
+    private static Map<String, Material> CACHE = new HashMap<>();
 
     private Materials() {}
 

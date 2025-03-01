@@ -11,17 +11,17 @@ import com.arkflame.squidgame.player.SquidPlayer;
 
 public class FoodLevelChangeListener implements Listener {
 
-    private final SquidGame plugin;
+    private SquidGame plugin;
 
-    public FoodLevelChangeListener(final SquidGame plugin) {
+    public FoodLevelChangeListener(SquidGame plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onFoodLevelChange(final FoodLevelChangeEvent e) {
-        final HumanEntity entity = e.getEntity();
+    public void onFoodLevelChange(FoodLevelChangeEvent e) {
+        HumanEntity entity = e.getEntity();
         if (entity instanceof Player) {
-            final SquidPlayer player = (SquidPlayer) this.plugin.getPlayerManager().getPlayer((Player) entity);
+            SquidPlayer player = this.plugin.getPlayerManager().getPlayer((Player) entity);
             if (player != null && player.getArena() != null) {
                 e.setCancelled(true);
             }

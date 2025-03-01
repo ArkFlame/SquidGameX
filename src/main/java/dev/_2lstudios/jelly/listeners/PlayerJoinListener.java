@@ -8,14 +8,14 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import dev._2lstudios.jelly.JellyPlugin;
 
 public class PlayerJoinListener implements Listener {
-    private final JellyPlugin plugin;
+    private JellyPlugin plugin;
 
-    public PlayerJoinListener(final JellyPlugin plugin) {
+    public PlayerJoinListener(JellyPlugin plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onPlayerJoin(final PlayerJoinEvent e) {
+    public void onPlayerJoin(PlayerJoinEvent e) {
         if (this.plugin.getPluginPlayerManager() != null) {
             this.plugin.getPluginPlayerManager().addPlayer(e.getPlayer());
         }

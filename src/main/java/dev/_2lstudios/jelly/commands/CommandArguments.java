@@ -4,14 +4,14 @@ import org.bukkit.entity.Player;
 
 public class CommandArguments {
 
-    private final Object[] args;
+    private Object[] args;
 
-    public CommandArguments(final Object[] args) {
+    public CommandArguments(Object[] args) {
         this.args = args;
     }
 
     /* Generic getters */
-    public Object get(final int index) {
+    public Object get(int index) {
         if (args.length < index) {
             return null;
         }
@@ -19,42 +19,42 @@ public class CommandArguments {
         return this.args[index];
     }
 
-    public Object get(final int index, final Object defaultValue) {
-        final Object result = this.get(index);
+    public Object get(int index, Object defaultValue) {
+        Object result = this.get(index);
         return result == null ? defaultValue : result;
     }
 
     /* Primitive java getters */
-    public boolean getBoolean(final int index, final boolean defaultValue) {
+    public boolean getBoolean(int index, boolean defaultValue) {
         return (boolean) this.get(index, defaultValue);
     }
 
-    public boolean getBoolean(final int index) {
+    public boolean getBoolean(int index) {
         return this.getBoolean(index, false);
     }
 
-    public int getInt(final int index, final int defaultValue) {
+    public int getInt(int index, int defaultValue) {
         return (int) this.get(index, defaultValue);
     }
 
-    public int getInt(final int index) {
+    public int getInt(int index) {
         return this.getInt(index, Integer.MIN_VALUE);
     }
 
-    public String getString(final int index) {
+    public String getString(int index) {
         return (String) this.get(index);
     }
 
-    public String getString(final int index, final String defaultValue) {
+    public String getString(int index, String defaultValue) {
         return (String) this.get(index, defaultValue);
     }
 
     /* Bukkit getters */
-    public Player getPlayer(final int index) {
+    public Player getPlayer(int index) {
         return (Player) this.get(index);
     }
 
-    public Player getPlayer(final int index, final Player defaultValue) {
+    public Player getPlayer(int index, Player defaultValue) {
         return (Player) this.get(index, defaultValue);
     }
 }

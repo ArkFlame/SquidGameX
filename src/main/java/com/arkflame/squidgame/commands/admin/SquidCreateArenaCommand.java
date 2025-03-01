@@ -17,9 +17,9 @@ import dev._2lstudios.jelly.errors.I18nCommandException;
 public class SquidCreateArenaCommand extends CommandListener {
     @Override
     public void handle(CommandContext context) throws IOException, CommandException, I18nCommandException {
-        final SquidGame plugin = (SquidGame) context.getPlugin();
-        final SquidPlayer player = (SquidPlayer) context.getPluginPlayer();
-        final String arenaName = context.getArguments().getString(0);
+        SquidGame plugin = (SquidGame) context.getPlugin();
+        SquidPlayer player = (SquidPlayer) context.getPluginPlayer();
+        String arenaName = context.getArguments().getString(0);
         plugin.getArenaManager().createArena(arenaName, player.getBukkitPlayer().getWorld());
         player.sendMessage("setup.arena-created");
     }

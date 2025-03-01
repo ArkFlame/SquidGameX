@@ -18,11 +18,11 @@ import dev._2lstudios.jelly.errors.CommandException;
 public class SquidEditArenaCommand extends CommandListener {
     @Override
     public void handle(CommandContext context) throws IOException, CommandException {
-        final String arenaName = context.getArguments().getString(0);
-        final Arena arena = ((SquidGame) context.getPlugin()).getArenaManager().getArena(arenaName);
+        String arenaName = context.getArguments().getString(0);
+        Arena arena = ((SquidGame) context.getPlugin()).getArenaManager().getArena(arenaName);
 
         if (arena == null) {
-            final SquidPlayer player = (SquidPlayer) context.getPluginPlayer();
+            SquidPlayer player = (SquidPlayer) context.getPluginPlayer();
             player.sendMessage("setup.arena-not-exist");
         } else {
             EditArenaGUI gui = new EditArenaGUI(arena);
