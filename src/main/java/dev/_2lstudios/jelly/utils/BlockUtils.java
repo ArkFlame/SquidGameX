@@ -4,6 +4,8 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
+import com.arkflame.squidgame.utils.Materials;
+
 public class BlockUtils {
     public static void destroyBlockGroup(final Block block, final boolean useParticles) {
         final Material target = block.getType();
@@ -15,7 +17,7 @@ public class BlockUtils {
         if (useParticles) {
             block.breakNaturally();
         } else {
-            block.setType(Materials.get("AIR");
+            block.setType(Materials.get("AIR"));
         }
 
         if (up.getType() == target) {
