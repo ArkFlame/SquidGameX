@@ -185,6 +185,10 @@ public class Arena {
         this.handler.handleArenaStart();
     }
 
+    public boolean isAlive(SquidPlayer player) {
+        return this.players.contains(player);
+    }
+
     public void killAllPlayers() {
         List<SquidPlayer> list = new ArrayList<>(this.players);
 
