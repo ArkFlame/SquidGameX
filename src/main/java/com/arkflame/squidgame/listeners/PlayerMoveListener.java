@@ -72,7 +72,7 @@ public class PlayerMoveListener implements Listener {
                     arena.broadcastSound(
                             this.plugin.getMainConfig().getSound("game-settings.sounds.glass-break", "GLASS"));
 
-                    // TODO: Schedule death of the player that walked on the fake block
+                    // Schedule death of the player that walked on the fake block
                     this.plugin.runTaskLater(() -> {
                         if (arena.isAlive(player)) {
                             arena.killPlayer(player);
