@@ -17,7 +17,7 @@ public class SquidStartCommand extends CommandListener {
         Arena arena = player.getArena();
 
         if (arena == null) {
-            player.sendMessage("arena.not-in-game");
+            player.sendMessageI18n("arena.not-in-game");
         } else {
             arena.forceStart();
         }

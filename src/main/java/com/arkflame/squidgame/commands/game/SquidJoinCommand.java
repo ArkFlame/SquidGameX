@@ -18,7 +18,7 @@ public class SquidJoinCommand extends CommandListener {
         SquidPlayer player = (SquidPlayer) context.getPluginPlayer();
 
         if (player.getArena() != null) {
-            player.sendMessage("arena.already-in-game");
+            player.sendMessageI18n("arena.already-in-game");
         } else {
             Arena arena = plugin.getArenaManager().getFirstAvailableArena();
             arena.addPlayer(player);

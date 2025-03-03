@@ -20,7 +20,7 @@ public class SquidSetLobbyCommand extends CommandListener {
         Configuration config = plugin.getMainConfig();
 
         config.setLocation("lobby", player.getBukkitPlayer().getLocation());
-        player.sendMessage("setup.set-lobby");
+        player.sendMessageI18n("setup.set-lobby");
         config.save();
     }
 }

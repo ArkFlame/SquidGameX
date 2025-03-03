@@ -27,7 +27,7 @@ public class ArenaHandler {
 
     public void handlePlayerJoin(SquidPlayer player) {
         arena.broadcastMessage("arena.join");
-        player.sendScoreboard(this.arena.getState().toString().toLowerCase());
+        player.sendScoreboardI18n(this.arena.getState().toString().toLowerCase());
 
         if (arena.getState() == ArenaState.WAITING) {
             if (arena.getPlayers().size() >= arena.getMinPlayers()) {

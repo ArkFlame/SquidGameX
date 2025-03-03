@@ -104,7 +104,7 @@ public class CommandHandler implements CommandExecutor {
             if (e instanceof I18nCommandException && sender instanceof Player) {
                 SquidPlayer player = (SquidPlayer) context.getPluginPlayer();
                 I18nCommandException i18nE = (I18nCommandException) e;
-                player.sendMessage(i18nE.getKey());
+                player.sendMessageI18n(i18nE.getKey());
             } else if (e instanceof CommandException) {
                 sender.sendMessage("§c" + e.getMessage());
             } else {

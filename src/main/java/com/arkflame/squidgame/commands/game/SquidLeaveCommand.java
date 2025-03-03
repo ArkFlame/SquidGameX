@@ -19,7 +19,7 @@ public class SquidLeaveCommand extends CommandListener {
         if (arena != null) {
             arena.removePlayer(player);
         } else {
-            player.sendMessage("arena.not-in-game");
+            player.sendMessageI18n("arena.not-in-game");
         }
     }
 }

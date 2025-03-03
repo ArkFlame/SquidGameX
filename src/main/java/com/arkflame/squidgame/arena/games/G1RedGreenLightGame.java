@@ -113,13 +113,13 @@ public class G1RedGreenLightGame extends ArenaGameBase {
 
         Bukkit.getScheduler().runTaskLater(SquidGame.getInstance(), () -> {
             for (SquidPlayer player : death) {
-                player.sendTitle("events.game-timeout-died.title", "events.game-timeout-died.subtitle", 3);
+                player.sendTitleI18n("events.game-timeout-died.title", "events.game-timeout-died.subtitle", 3);
                 player.playSound(
                         this.getArena().getMainConfig().getSound("game-settings.sounds.player-loss-game", "CAT_HIT"));
             }
 
             for (SquidPlayer player : alive) {
-                player.sendTitle("events.game-pass.title", "events.game-pass.subtitle", 3);
+                player.sendTitleI18n("events.game-pass.title", "events.game-pass.subtitle", 3);
                 player.playSound(
                         this.getArena().getMainConfig().getSound("game-settings.sounds.player-pass-game", "LEVELUP"));
             }

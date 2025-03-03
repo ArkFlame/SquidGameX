@@ -5,9 +5,7 @@ import org.bukkit.entity.Player;
 
 import com.arkflame.squidgame.SquidGame;
 import com.arkflame.squidgame.arena.Arena;
-import com.arkflame.squidgame.hooks.PlaceholderAPIFormatter;
 import com.arkflame.squidgame.jelly.player.PluginPlayer;
-import com.arkflame.squidgame.utils.ChatColors;
 
 public class SquidPlayer extends PluginPlayer {
 
@@ -16,10 +14,12 @@ public class SquidPlayer extends PluginPlayer {
     private boolean spectator = false;
 
     private SquidGame plugin;
+    private Player player;
 
     public SquidPlayer(SquidGame plugin, Player player) {
-        super(player);
+        super(plugin, player);
         this.plugin = plugin;
+        this.player = player;
     }
 
     public PlayerWand getWand() {
@@ -52,9 +52,9 @@ public class SquidPlayer extends PluginPlayer {
     public void setSpectator(boolean result) {
         this.spectator = result;
         if (result) {
-            this.getBukkitPlayer().setGameMode(GameMode.SPECTATOR);
+            this.player.setGameMode(GameMode.SPECTATOR);
         } else {
-            this.getBukkitPlayer().setGameMode(GameMode.SURVIVAL);
+            this.player.setGameMode(GameMode.SURVIVAL);
         }
     }
 
@@ -66,30 +66,16 @@ public class SquidPlayer extends PluginPlayer {
         return this.plugin.getMessagesConfig().getString(key);
     }
 
-    private String formatMessage(String message) {
-        String translatedMessage = this.getI18n(message);
-        String formatColor = ChatColors.color(
-                translatedMessage == null
-                        ? "§6§lWARNING: §eMissing translation key §7" + message + " §ein message.yml file"
-                        : translatedMessage);
-        String replacedVariables = PlaceholderAPIFormatter.formatString(formatColor, this.getBukkitPlayer());
-        return replacedVariables;
+    public void sendMessageI18n(String key) {
+        sendMessage(getI18n(key));
     }
 
-    public void sendRawMessage(String message) {
-        this.getBukkitPlayer().sendMessage(ChatColors.color(PlaceholderAPIFormatter.formatString(message, this.getBukkitPlayer())));
+    public void sendTitleI18n(String titleKey, String subtitleKey, int duration) {
+        sendTitle(getI18n(titleKey), getI18n(subtitleKey), duration);
     }
 
-    public void sendMessage(String message) {
-        this.getBukkitPlayer().sendMessage(this.formatMessage(message));
-    }
-
-    public void sendTitle(String title, String subtitle, int duration) {
-        super.sendTitle(this.formatMessage(title), this.formatMessage(subtitle), duration);
-    }
-
-    public void sendScoreboard(String scoreboardKey) {
-        this.plugin.getScoreboardHook().request(this.getBukkitPlayer(),
+    public void sendScoreboardI18n(String scoreboardKey) {
+        this.plugin.getScoreboardHook().request(this.player,
                 this.plugin.getScoreboardConfig().getStringList(scoreboardKey));
     }
 }

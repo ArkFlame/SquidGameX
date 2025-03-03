@@ -47,7 +47,7 @@ public class G3BattleGame extends ArenaGameBase {
         this.getArena().setPvPAllowed(false);
 
         for (SquidPlayer alivePlayer : this.getArena().getPlayers()) {
-            alivePlayer.sendTitle("events.game-pass.title", "events.game-pass.subtitle", 2);
+            alivePlayer.sendTitleI18n("events.game-pass.title", "events.game-pass.subtitle", 2);
         }
     }
 }

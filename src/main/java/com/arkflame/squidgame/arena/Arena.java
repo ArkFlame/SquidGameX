@@ -102,7 +102,7 @@ public class Arena {
 
     public void broadcastMessage(String message) {
         for (SquidPlayer player : this.getAllPlayers()) {
-            player.sendMessage(message);
+            player.sendMessageI18n(message);
         }
     }
 
@@ -114,13 +114,13 @@ public class Arena {
 
     public void broadcastTitle(String title, String subtitle) {
         for (SquidPlayer player : this.getAllPlayers()) {
-            player.sendTitle(title, subtitle, 2);
+            player.sendTitleI18n(title, subtitle, 2);
         }
     }
 
     public void broadcastScoreboard(String scoreboardKey) {
         for (SquidPlayer player : this.getAllPlayers()) {
-            player.sendScoreboard(scoreboardKey);
+            player.sendScoreboardI18n(scoreboardKey);
         }
     }
 
@@ -256,7 +256,7 @@ public class Arena {
 
         player.getBukkitPlayer().setGameMode(GameMode.SURVIVAL);
         player.teleportToLobby();
-        player.sendScoreboard("lobby");
+        player.sendScoreboardI18n("lobby");
         player.setArena(null);
     }
 
