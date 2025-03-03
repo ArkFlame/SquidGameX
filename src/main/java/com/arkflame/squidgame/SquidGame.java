@@ -2,7 +2,6 @@ package com.arkflame.squidgame;
 
 import java.util.logging.Level;
 
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 
 import com.arkflame.squidgame.arena.ArenaManager;
@@ -41,84 +40,83 @@ public class SquidGame extends JellyPlugin {
         SquidGame.instance = this;
 
         // Instantiate hooks
-        this.scoreboardHook = new ScoreboardHook(pluginManager);
+        scoreboardHook = new ScoreboardHook(pluginManager);
 
         if (pluginManager.isPluginEnabled("PlaceholderAPI")) {
             new PlaceholderAPIHook(this).register();
             PlaceholderAPIFormatter.setEnabled(true);
-            this.usePAPI = true;
+            usePAPI = true;
         }
 
         // Instantiate managers
-        this.arenaManger = new ArenaManager(this);
-        this.playerManager = new PlayerManager(this);
+        arenaManger = new ArenaManager(this);
+        playerManager = new PlayerManager(this);
 
         ScoreboardHook scoreboardHook = new ScoreboardHook(pluginManager);
 
         // Register commands
-        this.addCommand(new SquidGameCommand());
+        addCommand(new SquidGameCommand());
 
         // Register listeners
-        this.addEventListener(new AsyncPlayerChatListener(this));
-        this.addEventListener(new BlockBreakListener(this));
-        this.addEventListener(new BlockPlaceListener(this));
-        this.addEventListener(new EntityDamageListener(this));
-        this.addEventListener(new FoodLevelChangeListener(this));
-        this.addEventListener(new PlayerDeathListener(this));
-        this.addEventListener(new PlayerInteractListener(this));
-        this.addEventListener(new PlayerJoinListener(this, scoreboardHook));
-        this.addEventListener(new PlayerMoveListener(this));
-        this.addEventListener(new PlayerQuitListener(this));
+        addEventListener(new AsyncPlayerChatListener(this));
+        addEventListener(new BlockBreakListener(this));
+        addEventListener(new BlockPlaceListener(this));
+        addEventListener(new EntityDamageListener(this));
+        addEventListener(new FoodLevelChangeListener(this));
+        addEventListener(new PlayerDeathListener(this));
+        addEventListener(new PlayerInteractListener(this));
+        addEventListener(new PlayerJoinListener(this, scoreboardHook));
+        addEventListener(new PlayerMoveListener(this));
+        addEventListener(new PlayerQuitListener(this));
 
         // Register player manager
-        this.setPluginPlayerManager(this.playerManager);
+        setPluginPlayerManager(playerManager);
 
         // Register tasks
-        Bukkit.getScheduler().runTaskTimer(this, new ArenaTickTask(this), 20L, 20L);
+        runTaskTimer(new ArenaTickTask(this), 20L, 20L);
 
         // Enable inventory API
-        this.useInventoryAPI();
+        useInventoryAPI();
 
         // Generate config files
-        this.getMainConfig();
-        this.getMessagesConfig();
-        this.getScoreboardConfig();
+        getMainConfig();
+        getMessagesConfig();
+        getScoreboardConfig();
 
         // Banner
-        this.getLogger().log(Level.INFO, "§7§m==========================================================");
-        this.getLogger().log(Level.INFO,
-                "                §d§lSquid§f§lGame§r §a(v" + this.getDescription().getVersion() + ")");
-        this.getLogger().log(Level.INFO, "§r");
-        this.getLogger().log(Level.INFO, "§7- §dArena loaded: §7" + this.arenaManger.getArenas().size());
-        this.getLogger().log(Level.INFO, "§7- §dPlaceholderAPI Hook: "
-                + (this.usePAPI ? "§aYes" : "§cNo §7(Placeholders option will be disabled)"));
-        this.getLogger().log(Level.INFO, "§7- §dScoreboard Hook: "
-                + (this.scoreboardHook.canHook() ? "§aYes" : "§cNo §7(The scoreboards option will be disabled)"));
-        this.getLogger().log(Level.INFO, "§r");
-        this.getLogger().log(Level.INFO, "§7§m==========================================================");
-
+        log(Level.INFO, "§7§m==========================================================");
+        log(Level.INFO,
+                "                §d§lSquid§f§lGame§r §a(v" + getDescription().getVersion() + ")");
+        log(Level.INFO, "§r");
+        log(Level.INFO, "§7- §dArena loaded: §7" + arenaManger.getArenas().size());
+        log(Level.INFO, "§7- §dPlaceholderAPI Hook: "
+                + (usePAPI ? "§aYes" : "§cNo §7(Placeholders option will be disabled)"));
+        log(Level.INFO, "§7- §dScoreboard Hook: "
+                + (scoreboardHook.canHook() ? "§aYes" : "§cNo §7(The scoreboards option will be disabled)"));
+        log(Level.INFO, "§r");
+        log(Level.INFO, "§7§m==========================================================");
     }
 
     /* Configuration */
     public Configuration getMainConfig() {
-        return this.getConfig("config.yml");
+        return getConfig("config.yml");
     }
 
     public Configuration getMessagesConfig() {
-        return this.getConfig("messages.yml");
+        return getConfig("messages.yml");
     }
 
     public Configuration getScoreboardConfig() {
-        return this.getConfig("scoreboard.yml");
+        return getConfig("scoreboard.yml");
     }
 
     /* Managers */
     public ArenaManager getArenaManager() {
-        return this.arenaManger;
+        return arenaManger;
     }
 
     public PlayerManager getPlayerManager() {
-        return this.playerManager;
+        return playerManager;
     }
 
     public ScoreboardHook getScoreboardHook() {
@@ -130,29 +128,5 @@ public class SquidGame extends JellyPlugin {
 
     public static SquidGame getInstance() {
         return instance;
-    }
-
-    public void runTaskLater(Runnable runnable, long l) {
-        this.getServer().getScheduler().runTaskLater(this, runnable, l);
-    }
-
-    public void runTaskLaterAsynchronously(Runnable runnable, long l) {
-        this.getServer().getScheduler().runTaskLaterAsynchronously(this, runnable, l);
-    }
-
-    public void runTask(Runnable runnable) {
-        this.getServer().getScheduler().runTask(this, runnable);
-    }
-
-    public void runTaskAsync(Runnable runnable) {
-        this.getServer().getScheduler().runTaskAsynchronously(this, runnable);
-    }
-
-    public void runTaskTimer(Runnable runnable, long l, long l1) {
-        this.getServer().getScheduler().runTaskTimer(this, runnable, l, l1);
-    }
-
-    public void runTaskTimerAsynchronously(Runnable runnable, long l, long l1) {
-        this.getServer().getScheduler().runTaskTimerAsynchronously(this, runnable, l, l1);
     }
 }

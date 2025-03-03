@@ -1,5 +1,7 @@
 package com.arkflame.squidgame.jelly;
 
+import java.util.logging.Level;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -57,26 +59,30 @@ public class JellyPlugin extends JavaPlugin {
     }
 
     public void runTaskLater(Runnable runnable, long l) {
-        this.getServer().getScheduler().runTaskLater(this, runnable, l);
+        getServer().getScheduler().runTaskLater(this, runnable, l);
     }
 
     public void runTaskLaterAsynchronously(Runnable runnable, long l) {
-        this.getServer().getScheduler().runTaskLaterAsynchronously(this, runnable, l);
+        getServer().getScheduler().runTaskLaterAsynchronously(this, runnable, l);
     }
 
     public void runTask(Runnable runnable) {
-        this.getServer().getScheduler().runTask(this, runnable);
+        getServer().getScheduler().runTask(this, runnable);
     }
 
     public void runTaskAsync(Runnable runnable) {
-        this.getServer().getScheduler().runTaskAsynchronously(this, runnable);
+        getServer().getScheduler().runTaskAsynchronously(this, runnable);
     }
 
     public void runTaskTimer(Runnable runnable, long l, long l1) {
-        this.getServer().getScheduler().runTaskTimer(this, runnable, l, l1);
+        getServer().getScheduler().runTaskTimer(this, runnable, l, l1);
     }
 
     public void runTaskTimerAsynchronously(Runnable runnable, long l, long l1) {
-        this.getServer().getScheduler().runTaskTimerAsynchronously(this, runnable, l, l1);
+        getServer().getScheduler().runTaskTimerAsynchronously(this, runnable, l, l1);
+    }
+
+    public void log(Level level, String message) {
+        getLogger().log(level, message);
     }
 }
