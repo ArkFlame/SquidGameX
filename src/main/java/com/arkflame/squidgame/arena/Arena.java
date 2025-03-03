@@ -7,6 +7,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.World;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -361,5 +362,11 @@ public class Arena {
 
         this.setInternalTime(5);
         this.broadcastTitle("events.intermission.title", "events.intermission.subtitle");
+    }
+
+    public void giveItem(ItemStack itemStack) {
+        for (SquidPlayer player : this.getAllPlayers()) {
+            player.getBukkitPlayer().getInventory().addItem(itemStack);
+        }
     }
 }

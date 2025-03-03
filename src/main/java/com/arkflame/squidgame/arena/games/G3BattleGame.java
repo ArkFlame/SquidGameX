@@ -1,12 +1,14 @@
 package com.arkflame.squidgame.arena.games;
 
 import org.bukkit.Location;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.arkflame.squidgame.arena.Arena;
 import com.arkflame.squidgame.jelly.config.Configuration;
 import com.arkflame.squidgame.player.SquidPlayer;
+import com.arkflame.squidgame.utils.Materials;
 
 public class G3BattleGame extends ArenaGameBase {
 
@@ -33,6 +35,11 @@ public class G3BattleGame extends ArenaGameBase {
             this.getArena()
                     .broadcastPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, this.durationTime * 20, 1));
         }
+
+        // TODO: Configurable third game items
+        this.getArena().giveItem(new ItemStack(Materials.get("EGG")));
+        this.getArena().giveItem(new ItemStack(Materials.get("BREAD")));
+        this.getArena().giveItem(new ItemStack(Materials.get("MILK_BUCKET")));
     }
 
     @Override
