@@ -1,6 +1,7 @@
 package com.arkflame.squidgame.player;
 
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import com.arkflame.squidgame.SquidGame;
@@ -77,5 +78,9 @@ public class SquidPlayer extends PluginPlayer {
     public void sendScoreboardI18n(String scoreboardKey) {
         this.plugin.getScoreboardHook().request(this.player,
                 this.plugin.getScoreboardConfig().getStringList(scoreboardKey));
+    }
+
+    public Location getLocation() {
+        return this.player.getLocation();
     }
 }

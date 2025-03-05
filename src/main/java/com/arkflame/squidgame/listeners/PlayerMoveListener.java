@@ -72,12 +72,15 @@ public class PlayerMoveListener implements Listener {
                     arena.broadcastSound(
                             this.plugin.getMainConfig().getSound("game-settings.sounds.glass-break", "GLASS"));
 
+                    // Take the player down one block
+                    player.teleport(player.getLocation().subtract(0, 1, 0));
+
                     // Schedule death of the player that walked on the fake block
                     this.plugin.runTaskLater(() -> {
                         if (arena.isAlive(player)) {
                             arena.killPlayer(player);
                         }
-                    }, 40L);
+                    }, this.plugin.getMainConfig().getInt("game-settings.g6-glass-break-killing-ticks"));
                 }
             }
         }

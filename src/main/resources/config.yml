@@ -11,6 +11,8 @@ game-settings:
     milk_bucket:
       material: MILK_BUCKET
       amount: 1
+  # Time to kill players after they break the glass (If they dont die from falling)
+  g6-glass-break-killing-ticks: 40
   per-arena-chat: true
   send-player-to-lobby-on-join: true
   spawn-fireworks-on-win: true
