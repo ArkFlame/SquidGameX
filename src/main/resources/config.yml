@@ -1,6 +1,16 @@
 game-settings:
   allow-victory-before-completing-game: false
   give-blindness-in-game-3: true
+  game-3-items:
+    egg:
+      material: EGG
+      amount: 1
+    bread:
+      material: BREAD
+      amount: 1
+    milk_bucket:
+      material: MILK_BUCKET
+      amount: 1
   per-arena-chat: true
   send-player-to-lobby-on-join: true
   spawn-fireworks-on-win: true

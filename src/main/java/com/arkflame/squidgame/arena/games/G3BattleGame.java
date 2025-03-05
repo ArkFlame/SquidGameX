@@ -1,6 +1,7 @@
 package com.arkflame.squidgame.arena.games;
 
 import org.bukkit.Location;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -29,17 +30,19 @@ public class G3BattleGame extends ArenaGameBase {
 
     @Override
     public void onStart() {
-        this.getArena().setPvPAllowed(true);
+        Arena arena = this.getArena();
+        arena.setPvPAllowed(true);
 
-        if (this.getArena().getMainConfig().getBoolean("game-settings.give-blindness-in-game-3", true)) {
-            this.getArena()
-                    .broadcastPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, this.durationTime * 20, 1));
+        if (arena.getMainConfig().getBoolean("game-settings.give-blindness-in-game-3", true)) {
+            arena.broadcastPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, this.durationTime * 20, 1));
         }
 
-        // TODO: Configurable third game items
-        this.getArena().giveItem(new ItemStack(Materials.get("EGG")));
-        this.getArena().giveItem(new ItemStack(Materials.get("BREAD")));
-        this.getArena().giveItem(new ItemStack(Materials.get("MILK_BUCKET")));
+        ConfigurationSection section = arena.getMainConfig().getConfigurationSection("game-settings.game-3-items");
+        if (section != null) {
+            for (String key : section.getKeys(false)) {
+                arena.giveItem(new ItemStack(Materials.get(key + ".material"), section.getInt(key + ".amount")));
+            }
+        }
     }
 
     @Override
