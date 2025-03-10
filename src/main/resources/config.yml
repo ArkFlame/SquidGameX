@@ -1,3 +1,17 @@
+hotbars:
+  lobby:
+    items:
+      test:
+        slot: 0
+        material: DIAMOND_SWORD
+        amount: 1
+        name: "Test"
+        lore:
+          - "This is a test"
+        damage: 0
+        commands:
+          - "test"
+
 game-settings:
   allow-victory-before-completing-game: false
   give-blindness-in-game-3: true

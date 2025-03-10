@@ -44,10 +44,16 @@ public class PluginPlayer {
     }
 
     public void sendMessage(String message) {
+        if (message == null) {
+            return;
+        }
         this.player.sendMessage(formatMessage(message));
     }
 
     public void sendMessage(String message, long delay) {
+        if (message == null) {
+            return;
+        }
         this.plugin.runTaskLater(() -> {
             sendMessage(message);
             this.player.playSound(this.player.getLocation(), Sounds.get("ITEM_PICKUP", "ENTITY_ITEM_PICKUP"), 1.0F, 1.0F);

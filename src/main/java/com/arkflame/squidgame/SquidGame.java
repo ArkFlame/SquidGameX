@@ -21,6 +21,8 @@ import com.arkflame.squidgame.listeners.PlayerInteractListener;
 import com.arkflame.squidgame.listeners.PlayerJoinListener;
 import com.arkflame.squidgame.listeners.PlayerMoveListener;
 import com.arkflame.squidgame.listeners.PlayerQuitListener;
+import com.arkflame.squidgame.lobby.LobbyHotbarManager;
+import com.arkflame.squidgame.lobby.PlayerHotbarManager;
 import com.arkflame.squidgame.player.PlayerManager;
 import com.arkflame.squidgame.tasks.ArenaTickTask;
 
@@ -29,6 +31,9 @@ public class SquidGame extends JellyPlugin {
     private ScoreboardHook scoreboardHook;
     private ArenaManager arenaManger;
     private PlayerManager playerManager;
+
+    private LobbyHotbarManager lobbyHotbarManager;
+    private PlayerHotbarManager playerHotbarManager;
 
     private boolean usePAPI;
 
@@ -52,6 +57,14 @@ public class SquidGame extends JellyPlugin {
         arenaManger = new ArenaManager(this);
         playerManager = new PlayerManager(this);
 
+        // Instantiate hotbars
+        lobbyHotbarManager = new LobbyHotbarManager();
+        playerHotbarManager = new PlayerHotbarManager(lobbyHotbarManager);
+
+        // Load hotbars
+        lobbyHotbarManager.loadHotbars(getConfig());
+
+        // Instantiate hooks
         ScoreboardHook scoreboardHook = new ScoreboardHook(pluginManager);
 
         // Register commands
@@ -68,6 +81,9 @@ public class SquidGame extends JellyPlugin {
         addEventListener(new PlayerJoinListener(this, scoreboardHook));
         addEventListener(new PlayerMoveListener(this));
         addEventListener(new PlayerQuitListener(this));
+
+        // Register listeners for hotbars
+        addEventListener(playerHotbarManager);
 
         // Register player manager
         setPluginPlayerManager(playerManager);
